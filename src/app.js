@@ -3,6 +3,7 @@ import { SWRConfig } from "swr";
 import fetch from "unfetch";
 import "./domains/core/index";
 import { ReminderListPage } from "./domains/reminder";
+import { OneReminderPage } from "./domains/reminder";
 
 
 const fetcher = async (ressource) => {
@@ -22,7 +23,8 @@ const App = () => {
 			>
 				<Router>
 					<Switch>
-						<Route path="/" component={ReminderListPage}/>
+						<Route exact path="/reminder" component={ReminderListPage}/>
+						<Route  path="/:id" component={OneReminderPage}/>
 					</Switch>
 				</Router>
 			</SWRConfig>
