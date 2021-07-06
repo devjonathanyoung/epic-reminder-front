@@ -4,6 +4,7 @@ import fetch from "unfetch";
 import "./domains/core/index";
 import { ReminderListPage } from "./domains/reminder";
 import { OneReminderPage } from "./domains/reminder";
+import { FormCreateReminder } from "./domains/reminder";
 
 
 const fetcher = async (ressource) => {
@@ -24,6 +25,7 @@ const App = () => {
 				<Router>
 					<Switch>
 						<Route exact path="/reminder" component={ReminderListPage}/>
+						<Route  path="/reminder/create" component={FormCreateReminder}/>
 						<Route  path="/:id" component={OneReminderPage}/>
 					</Switch>
 				</Router>

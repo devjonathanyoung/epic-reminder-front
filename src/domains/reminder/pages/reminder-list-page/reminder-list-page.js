@@ -1,5 +1,6 @@
 import useReminderList from "../../services/use-reminder-list";
 import ReminderRow from "./reminder-row";
+import { Link } from "react-router-dom";
 
 
 const ReminderListPage = () => {
@@ -14,6 +15,7 @@ const ReminderListPage = () => {
 					return <li key={reminder.id}>{reminder.id}</li>;
 				})}
 			</ul> */}
+			<button> <Link to="/reminder/create">Add a new reminder</Link></button>
 			<table>
           		<thead>
 					<tr>
