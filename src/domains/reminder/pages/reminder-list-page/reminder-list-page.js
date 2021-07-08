@@ -23,7 +23,7 @@ const ReminderListPage = () => {
 						<th>Type</th>
 						<th>Date of release</th>
 						<th>Comment</th>
-						<th colspan="3">Actions</th>
+						<th colSpan="3">Actions</th>
 					</tr>
 				</thead>
           		<tbody>

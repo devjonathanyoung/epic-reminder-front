@@ -1,43 +1,65 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import useCreateOne from "../../services/use-create-one";
+
+  
 
 const FormCreateReminder = () => {
+	const [reminder, setReminder] = useState({});
+
+	const handleChange = ({ target }) => {
+		const { name, value } = target;
+		setReminder((prevReminder) => ({
+		  ...prevReminder,
+		  [name]: value
+		}));
+	  };
+
+	  const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log("reminder in submit", reminder);
+		//envoyer le nouveau reminder au back
+
+	  };
 
 	return(
-
 		<div>
 			<h1>Add a new reminder</h1>
-			<form
-				className="form__create"
-				//on change et on submit
-			>
-				<div className="field">
-					<label htmlFor="name">Name</label>
-					<input type="text" id="name" name="name" autoFocus={true} required />
-				</div>
-				<div className="field">
-					<label htmlFor="type">Type</label>
-					<select
-						name="type"
-						id="type"
-						required
-					>
-						<option value="">Select a type</option>
-						<option value="book">Book</option>
-						<option value="game">Game</option>
-						<option value="movie">Movie</option>
-					</select>
-				</div>
-				<div className="field">
-					<label htmlFor="date">Date of release</label>
-					<input type="date" id="date" name="date" />
-				</div>
-				<div className="field">
-					<label htmlFor="comment">Comment</label>
-					<input type="text" id="comment" name="comment" />
-				</div>
-				<button>Create</button>
+			<form onSubmit={handleSubmit}>
+				<input
+					value={reminder.name || ""}
+					name="name"
+					type="text"
+					placeholder="Name"
+					onChange ={handleChange}
+					required
+				/>
+				<select
+					name="type"
+					onChange ={handleChange}
+					required
+				>
+					<option value="">Select a type</option>
+					<option value="book">Book</option>
+					<option value="game">Game</option>
+					<option value="movie">Movie</option>
+				</select>
+				<input
+					value={reminder.date || ""}
+					type="date"
+					name="date"
+					onChange ={handleChange}
+				/>
+				<input
+					value={reminder.comment || ""}
+					type="text"
+					name="comment"
+					placeholder="Comment"
+					onChange ={handleChange}
+				/>
+				<button type="submit" >Create</button>
 			</form>
-			<Link to={"/reminder"}>Back to the list</Link>
+			<Link to={"/"}>Back to the list</Link>
 		</div>
 	);
 };
