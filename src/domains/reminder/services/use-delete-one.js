@@ -11,7 +11,7 @@ const fetcher = url => axios.delete(url).then(res => res.data);
 
 
 const useDeleteOne = (idReminder) => {
-	const { data, error } = useSWR(`http://localhost:3001/reminder/${ idReminder }`, fetcher, { method: "DELETE" });
+	const { data, error } = useSWR(`http://localhost:3001/reminder/${ idReminder }`, fetcher);
 	return {
 		reminder: data,
 		isLoading: !error && !data,
