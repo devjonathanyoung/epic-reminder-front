@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { SWRConfig } from "swr";
 import fetch from "unfetch";
 import "./domains/core/index";
+import { Header } from "./domains/reminder";
 import { ReminderListPage } from "./domains/reminder";
 import { OneReminderPage } from "./domains/reminder";
 import { FormCreateReminder } from "./domains/reminder";

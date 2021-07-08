@@ -8,7 +8,7 @@ const ReminderRow = (props) => {
 			<td>{props.type}</td>
 			<td>{props.date}</td>
 			<td>{props.comment}</td>
-			<Link to={`/reminder/${props.id}`}><td>See more</td></Link>
+			<td><Link to={`/reminder/${props.id}`}>See more</Link></td>
 			<td>Update</td>
 			<td>Delete</td>							
 		</tr>
