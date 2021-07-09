@@ -103,4 +103,4 @@ const FormCreateReminder = (props) => {
 	);
 };
 
-export default FormCreateReminder;
+export default withRouter(FormCreateReminder);
