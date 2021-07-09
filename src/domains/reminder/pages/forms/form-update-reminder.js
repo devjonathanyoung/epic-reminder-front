@@ -5,6 +5,7 @@ import updateReminder from "../../services/update-reminder";
 
 const FormUpdateReminder = (props) => {
 	const idReminder = props.match.params.id;
+	console.log("update idreminder", idReminder);
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const history = useHistory(); 
 
