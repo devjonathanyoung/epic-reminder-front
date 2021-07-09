@@ -5,7 +5,9 @@ import useUpdateReminder from "../../services/use-update-reminder";
 
 const FormUpdateReminder = (props) => {
 	const idReminder = props.match.params.id;
+	console.log("update idreminder", idReminder);
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
+	console.log("update reminder", reminder);
 	const updateReminder = useUpdateReminder;
 
 	const [update, setUpdate] = useState( { ...reminder[0] } );
@@ -20,6 +22,7 @@ const FormUpdateReminder = (props) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		updateReminder(update).then(response => console.log(response));
+		props.history.push("/");
 	};
 
 	return(

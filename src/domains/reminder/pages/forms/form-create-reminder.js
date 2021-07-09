@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import useCreateReminder from "../../services/use-create-one";
-import { withRouter } from "react-router";
-
-  
+ 
 
 const FormCreateReminder = (props) => {
 	const [reminder, setReminder] = useState({});
@@ -65,4 +63,4 @@ const FormCreateReminder = (props) => {
 	);
 };
 
-export default withRouter(FormCreateReminder);
+export default FormCreateReminder;

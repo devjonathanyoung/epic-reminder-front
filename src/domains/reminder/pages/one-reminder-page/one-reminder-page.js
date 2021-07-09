@@ -5,7 +5,13 @@ import useDeleteReminder from "../../services/use-delete-reminder";
 const OneReminderPage = (props) => {
 	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
-	// const handleDelete = useDeleteReminder(idReminder);
+	const deleteReminder = useDeleteReminder;
+
+	const handleDelete = (id) => {
+		deleteReminder(id).then(response => console.log(response));
+		props.history.push("/");
+	};
+
 	return(
 
 		<div>
@@ -18,7 +24,7 @@ const OneReminderPage = (props) => {
 					<p>Comment: {reminder[0].comment}</p>
 					<div>
 						<button><Link to={`/reminder/update/${ idReminder }`}>Update</Link></button>
-						{/* <button  onClick={() => handleDelete}>Delete</button> */}
+						<button  onClick={() => handleDelete(idReminder)}>Delete</button>
 					</div>
 				</section>
 			</div>}
