@@ -6,7 +6,7 @@ const ReminderRow = (props) => {
 			
 			<td>{props.name}</td>
 			<td>{props.type}</td>
-			<td>{props.date}</td>
+			<td>{props.date ? props.date.slice(0,10) : ""}</td>
 			<td>{props.comment}</td>
 			<td><Link to={`/reminder/${props.id}`}>See more</Link></td>
 			<td>Update</td>

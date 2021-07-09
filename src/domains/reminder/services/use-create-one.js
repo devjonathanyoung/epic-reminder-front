@@ -1,23 +1,19 @@
-import useSWR from "swr";
+// import useSWR from "swr";
 import fetch from "unfetch";
 
-const fetcher = async (ressource) => {
-	const response = await fetch(ressource);
-	return await response.json();
+
+const useCreateReminder = async(reminder) => {
+	const response = await fetch("http://localhost:3001/reminder", {
+		method: "POST",
+		headers: { "Content-Type":"application/json" },
+		body: JSON.stringify(reminder)
+	});
+	return response.json();
 };
 
 
-const useCreateOne = (datas) => {
-	const { data, error } = useSWR("http://localhost:3001/reminder", fetcher(datas));
-	return {
-		newReminder: data,
-		isLoading: !error && !data,
-		isError: error
-	};
-};
-
-// const useCreateOne = (newReminder) => {
-// 	const { data, error } = useSWR("http://localhost:3001/reminder", fetcher);
+// const useCreateReminder = (datas) => {
+// 	const { data, error } = useSWR("http://localhost:3001/reminder", fetcher(datas));
 // 	return {
 // 		newReminder: data,
 // 		isLoading: !error && !data,
@@ -25,4 +21,5 @@ const useCreateOne = (datas) => {
 // 	};
 // };
 
-export default useCreateOne;
+
+export default useCreateReminder;

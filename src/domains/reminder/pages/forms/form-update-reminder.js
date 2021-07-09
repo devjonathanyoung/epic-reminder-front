@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import useOneReminder from "../../services/use-one-reminder";
-
+import useUpdateReminder from "../../services/use-update-reminder";
 
 const FormUpdateReminder = (props) => {
 	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
+	const updateReminder = useUpdateReminder;
 
 	const [update, setUpdate] = useState( { ...reminder[0] } );
 	const handleChange = ({ target }) => {
@@ -18,8 +19,7 @@ const FormUpdateReminder = (props) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log("reminder in submit", update);
-		//envoyer l'updated reminder au back
+		updateReminder(update).then(response => console.log(response));
 	};
 
 	return(

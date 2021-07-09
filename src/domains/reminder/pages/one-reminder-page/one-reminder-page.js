@@ -1,25 +1,24 @@
 import useOneReminder from "../../services/use-one-reminder";
 import { Link } from "react-router-dom";
-import useDeleteOne from "../../services/use-delete-one";
+import useDeleteReminder from "../../services/use-delete-reminder";
 
 const OneReminderPage = (props) => {
-	const idReminder = props.location.pathname.slice(10);
+	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
-	const handleDelete = useDeleteOne(idReminder);
+	// const handleDelete = useDeleteReminder(idReminder);
 	return(
-		// check isLoading, isError ok ? 
-		// balise section pas adaptée => table ? 
+
 		<div>
 			{ !isLoading && !isError && <div>
 				<h1>One reminder details</h1>
 				<section>
 					<h2>Name: {reminder[0].name}</h2>
 					<p>Type: {reminder[0].type}</p>
-					<p>Date of release: {reminder[0].date} </p>
+					<p>Date of release: {reminder[0].date ? reminder[0].date.slice(0,10) : ""} </p>
 					<p>Comment: {reminder[0].comment}</p>
 					<div>
 						<button><Link to={`/reminder/update/${ idReminder }`}>Update</Link></button>
-						<button  onClick={() => handleDelete(reminder[0].id)}>Delete</button>
+						{/* <button  onClick={() => handleDelete}>Delete</button> */}
 					</div>
 				</section>
 			</div>}

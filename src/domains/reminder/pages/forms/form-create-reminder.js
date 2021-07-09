@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import useCreateOne from "../../services/use-create-one";
+import useCreateReminder from "../../services/use-create-one";
+import { withRouter } from "react-router";
 
   
 
-const FormCreateReminder = () => {
+const FormCreateReminder = (props) => {
 	const [reminder, setReminder] = useState({});
+	const createReminder = useCreateReminder;
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
@@ -17,9 +19,8 @@ const FormCreateReminder = () => {
 
 	  const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log("reminder in submit", reminder);
-		//envoyer le nouveau reminder au back
-
+		createReminder(reminder).then(response => console.log(response));
+		props.history.push("/");
 	  };
 
 	return(
@@ -57,11 +58,11 @@ const FormCreateReminder = () => {
 					placeholder="Comment"
 					onChange ={handleChange}
 				/>
-				<button type="submit" >Create</button>
+				<button type="submit">Create</button>
 			</form>
 			<Link to={"/"}>Back to the list</Link>
 		</div>
 	);
 };
 
-export default FormCreateReminder;
+export default withRouter(FormCreateReminder);
