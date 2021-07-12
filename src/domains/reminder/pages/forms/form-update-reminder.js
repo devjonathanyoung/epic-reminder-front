@@ -5,9 +5,9 @@ import useUpdateReminder from "../../services/use-update-reminder";
 
 const FormUpdateReminder = (props) => {
 	const idReminder = props.match.params.id;
-	console.log("update idreminder", idReminder);
+	console.log("updateform idreminder", idReminder);
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
-	console.log("update reminder", reminder);
+	console.log("updateform reminder", reminder);
 	const updateReminder = useUpdateReminder;
 
 	const [update, setUpdate] = useState( { ...reminder[0] } );
@@ -49,7 +49,7 @@ const FormUpdateReminder = (props) => {
 						<option value="movie">Movie</option>
 					</select>
 					<input
-						value={update.date || ""}
+						value={update.date ? update.date.slice(0,10) : ""}
 						type="date"
 						name="date"
 						onChange ={handleChange}
