@@ -18,10 +18,10 @@ const OneReminderPage = (props) => {
 			{ !isLoading && !isError && <div>
 				<h1>One reminder details</h1>
 				<section>
-					<h2>Name: {reminder[0].name}</h2>
-					<p>Type: {reminder[0].type}</p>
-					<p>Date of release: {reminder[0].date ? reminder[0].date.slice(0,10) : ""} </p>
-					<p>Comment: {reminder[0].comment}</p>
+					<h2>Name: {reminder.name}</h2>
+					<p>Type: {reminder.type}</p>
+					<p>Date of release: {reminder.date ? reminder.date.slice(0,10) : ""} </p>
+					<p>Comment: {reminder.comment}</p>
 					<div>
 						<button><Link to={`/reminder/update/${ idReminder }`}>Update</Link></button>
 						<button  onClick={() => handleDelete(idReminder)}>Delete</button>

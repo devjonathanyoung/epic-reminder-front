@@ -8,7 +8,7 @@ const FormUpdateReminder = (props) => {
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const updateReminder = useUpdateReminder;
 
-	const [update, setUpdate] = useState( { ...reminder[0] } );
+	const [update, setUpdate] = useState( { ...reminder } );
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
 		setUpdate((prevReminder) => ({
