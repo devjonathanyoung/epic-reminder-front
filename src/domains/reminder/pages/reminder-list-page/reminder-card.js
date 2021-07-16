@@ -19,7 +19,7 @@ const ReminderCard = (props) => {
 				<p>Comment: {props.comment}</p>
 			</Link>
 			<div>
-				<button><Link to={`/reminder/update/${ props.id }`}>Update</Link></button>
+				<button><Link className="link--style" to={`/reminder/update/${ props.id }`}>Update</Link></button>
 				<button  onClick={() => handleDelete(props.id)}>Delete</button>
 			</div>
 		</div>
