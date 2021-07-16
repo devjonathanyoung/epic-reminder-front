@@ -1,4 +1,3 @@
-import useSWR from "swr";
 import fetch from "unfetch";
 
 const useDeleteReminder = async(reminderId) => {

@@ -2,7 +2,6 @@ import fetch from "unfetch";
 
 
 const useUpdateReminder = async(reminder) => {
-	console.log("reminder update", reminder);
 	const response = await fetch(`http://localhost:3001/reminder/${ reminder.id }`, {
 		method: "PUT",
 		headers: { "Content-Type":"application/json" },
