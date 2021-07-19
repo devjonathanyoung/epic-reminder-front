@@ -19,8 +19,8 @@ const OneReminderPage = (props) => {
 				<h1>One reminder details</h1>
 				<section>
 					<h2>Name: {reminder.name}</h2>
-					<p>Type: {reminder.type}</p>
-					<p>Date of release: {reminder.date ? reminder.date.slice(0,10) : ""} </p>
+					<div>Type: {reminder.type}</div>
+					<div>Date of release: {reminder.date ? reminder.date.slice(0,10) : ""} </div>
 					<p>Comment: {reminder.comment}</p>
 					<div>
 						<button><Link to={`/reminder/update/${ idReminder }`}>Update</Link></button>

@@ -14,8 +14,8 @@ const ReminderCard = (props) => {
 		<div className="card-reminder" key={props.id}>
 			<Link className="link--style" to={`/reminder/${ props.id }`}>
 				<h2>Name: {props.name}</h2>
-				<p>Type: {props.type}</p>
-				<p>Date of release: {props.date ? props.date.slice(0,10) : ""} </p>
+				<div>Type: {props.type}</div>
+				<div>Date of release: {props.date ? props.date.slice(0,10) : ""} </div>
 				<p>Comment: {props.comment}</p>
 			</Link>
 			<div>
