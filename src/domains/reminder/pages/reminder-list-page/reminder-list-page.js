@@ -1,5 +1,5 @@
 import useReminderList from "../../services/use-reminder-list";
-import ReminderCard from "./reminder-card";
+import { ReminderCard } from "../../index";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
@@ -7,11 +7,9 @@ import { useState } from "react";
 const ReminderListPage = () => {
 	const { reminders, isLoading, isError } = useReminderList();
 	const [listReminders, setListReminders] = useState(reminders);
-	console.log("list reminders", listReminders);
 
 	const sortByName = () => {
 		let sortByNameArr = [...listReminders].sort();
-		console.log("sortarrayName", sortByNameArr);
 		setListReminders(sortByNameArr);
 	  };
  
