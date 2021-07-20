@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
-import useDeleteReminder from "../../services/use-delete-reminder";
+import deleteReminder from "../../services/delete-reminder";
 
 import "../../../core/theme/card-reminder.scss";
 
 const ReminderCard = (props) => {
-	const deleteReminder = useDeleteReminder;
 
 	const handleDelete = (id) => {
 		deleteReminder(id).then(response => console.log(response));

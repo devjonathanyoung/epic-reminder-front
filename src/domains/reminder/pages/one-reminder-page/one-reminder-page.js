@@ -1,11 +1,10 @@
 import useOneReminder from "../../services/use-one-reminder";
 import { Link } from "react-router-dom";
-import useDeleteReminder from "../../services/use-delete-reminder";
+import deleteReminder from "../../services/delete-reminder";
 
 const OneReminderPage = (props) => {
 	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
-	const deleteReminder = useDeleteReminder;
 
 	const handleDelete = (id) => {
 		deleteReminder(id).then(response => console.log(response));
