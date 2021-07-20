@@ -69,7 +69,7 @@ const FormCreateReminder = (props) => {
 				</div>
 				<button type="submit">Create</button>
 			</form>
-			<Link to={"/"}>Back to the list</Link>
+			<Link className="link" to={"/"}>Back to the list</Link>
 		</div>
 	);
 };

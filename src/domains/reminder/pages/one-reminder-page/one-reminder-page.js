@@ -22,12 +22,12 @@ const OneReminderPage = (props) => {
 					<div>Date of release: {reminder.date ? reminder.date.slice(0,10) : ""} </div>
 					<p>Comment: {reminder.comment}</p>
 					<div>
-						<button><Link to={`/reminder/update/${ idReminder }`}>Update</Link></button>
+						<button><Link className="link" to={`/reminder/update/${ idReminder }`}>Update</Link></button>
 						<button  onClick={() => handleDelete(idReminder)}>Delete</button>
 					</div>
 				</section>
 			</div>}
-			<Link to={"/"}>Back to the list</Link>
+			<Link className="link" to={"/"}>Back to the list</Link>
 		</div>
 	);
 };

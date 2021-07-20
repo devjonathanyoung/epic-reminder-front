@@ -19,7 +19,7 @@ const ReminderListPage = () => {
 		<div>
 			<h1>Reminder List Page</h1>
 			<button onClick={sortByName}>Sort by name</button>
-			<button> <Link to="/reminder/create">Add a new reminder</Link></button>
+			<button> <Link className="link" to="/reminder/create">Add a new reminder</Link></button>
 
 			{!isLoading && !isError && reminders.map((reminder) => {
 				return (

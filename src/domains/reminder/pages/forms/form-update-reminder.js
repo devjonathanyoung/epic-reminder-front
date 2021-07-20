@@ -72,7 +72,7 @@ const FormUpdateReminder = (props) => {
 					</div>
 					<button type="submit" >Update</button>
 				</form>
-				<Link to={"/"}>Back to the list</Link>
+				<Link className="link" to={"/"}>Back to the list</Link>
 			</div>}   
 		</div>
 	);
