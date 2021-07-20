@@ -8,13 +8,23 @@ const ReminderCard = (props) => {
 	const handleDelete = (id) => {
 		deleteReminder(id).then(response => console.log(response));
 	};
+
+	const handleFormatDate = (date) => {
+		if (date === null) {
+			return "";
+		} else {
+			return date.slice(0,10);
+		}
+	};
+
+
 	return(
         
 		<div className="card-reminder" key={props.id}>
 			<Link className="link" to={`/reminder/${ props.id }`}>
 				<h2>Name: {props.name}</h2>
 				<div>Type: {props.type}</div>
-				<div>Date of release: {props.date ? props.date.slice(0,10) : ""} </div>
+				<div>Date of release: {handleFormatDate(props.date)} </div>
 				<p>Comment: {props.comment}</p>
 			</Link>
 			<div>

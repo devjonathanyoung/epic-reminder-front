@@ -11,6 +11,14 @@ const OneReminderPage = (props) => {
 		props.history.push("/");
 	};
 
+	const handleFormatDate = (date) => {
+		if (date === null) {
+			return "";
+		} else {
+			return date.slice(0,10);
+		}
+	};
+
 	return(
 
 		<div>
@@ -19,7 +27,7 @@ const OneReminderPage = (props) => {
 				<section>
 					<h2>Name: {reminder.name}</h2>
 					<div>Type: {reminder.type}</div>
-					<div>Date of release: {reminder.date ? reminder.date.slice(0,10) : ""} </div>
+					<div>Date of release: {handleFormatDate(reminder.date)} </div>
 					<p>Comment: {reminder.comment}</p>
 					<div>
 						<button><Link className="link" to={`/reminder/update/${ idReminder }`}>Update</Link></button>
