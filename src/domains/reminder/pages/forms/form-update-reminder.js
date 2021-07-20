@@ -1,12 +1,11 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import useOneReminder from "../../services/use-one-reminder";
-import useUpdateReminder from "../../services/use-update-reminder";
+import updateReminder from "../../services/update-reminder";
 
 const FormUpdateReminder = (props) => {
 	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
-	const updateReminder = useUpdateReminder;
 
 	const [update, setUpdate] = useState( { ...reminder } );
 	const handleChange = ({ target }) => {

@@ -1,7 +1,7 @@
 import fetch from "unfetch";
 
 
-const useUpdateReminder = async(reminder) => {
+const updateReminder = async(reminder) => {
 	const response = await fetch(`http://localhost:3001/reminder/${ reminder.id }`, {
 		method: "PUT",
 		headers: { "Content-Type":"application/json" },
@@ -10,4 +10,4 @@ const useUpdateReminder = async(reminder) => {
 	return response.json();
 };
 
-export default useUpdateReminder;
+export default updateReminder;
