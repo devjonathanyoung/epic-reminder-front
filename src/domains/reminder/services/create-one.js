@@ -1,7 +1,7 @@
 import fetch from "unfetch";
 
 
-const useCreateReminder = async(reminder) => {
+const createReminder = async(reminder) => {
 	const response = await fetch("http://localhost:3001/reminder", {
 		method: "POST",
 		headers: { "Content-Type":"application/json" },
@@ -10,4 +10,4 @@ const useCreateReminder = async(reminder) => {
 	return response.json();
 };
 
-export default useCreateReminder;
+export default createReminder;

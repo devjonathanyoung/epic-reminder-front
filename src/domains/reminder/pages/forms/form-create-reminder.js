@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import useCreateReminder from "../../services/use-create-one";
+import createReminder from "../../services/create-one";
  
 
 const FormCreateReminder = (props) => {
 	const [reminder, setReminder] = useState({});
-	const createReminder = useCreateReminder;
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
