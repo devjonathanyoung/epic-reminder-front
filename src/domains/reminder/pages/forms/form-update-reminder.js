@@ -17,15 +17,38 @@ const FormUpdateReminder = (props) => {
 		}));
 	  };
 
+	  const handleValidation = () => {
+
+		const reminderInCreation = update;
+		const types = ["book", "movie", "game"];
+		let formIsValid = true;
+
+		//name
+		if (reminderInCreation.name === undefined || reminderInCreation.name.trim().length === 0) { 
+			formIsValid = false;
+		}
+
+		//type
+		if (reminderInCreation.type === undefined || !types.includes(reminderInCreation.type) ) {
+			formIsValid = false;
+		}
+		return formIsValid;
+	};
+
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		updateReminder(update)
-			.then(() => {
-				history.push("/");
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		if (handleValidation()) {
+			updateReminder(update)
+				.then(() => {
+					history.push("/");
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+		} else {
+			alert(JSON.stringify({ message: "Form submission failed: name and type cannot be empty" }, null, 4));
+		}
 	};	
 
 	return(
