@@ -1,14 +1,20 @@
 import useOneReminder from "../../services/use-one-reminder";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import deleteReminder from "../../services/delete-reminder";
 
 const OneReminderPage = (props) => {
 	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
+	const history = useHistory(); 
 
 	const handleDelete = (id) => {
-		deleteReminder(id).then(response => console.log(response));
-		props.history.push("/");
+		deleteReminder(id)
+			.then(() => {
+				history.push("/");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 
 	const handleFormatDate = (date) => {

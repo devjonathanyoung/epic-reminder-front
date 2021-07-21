@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import createReminder from "../../services/create-one";
  
 
 const FormCreateReminder = (props) => {
 	const [reminder, setReminder] = useState({});
+	const history = useHistory(); 
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
@@ -14,11 +15,17 @@ const FormCreateReminder = (props) => {
 		}));
 	  };
 
-	  const handleSubmit = (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
-		createReminder(reminder).then(response => console.log(response));
-		props.history.push("/");
-	  };
+		createReminder(reminder)
+			.then(() => {
+				history.push("/");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};			
+
 
 	return(
 		<div>
