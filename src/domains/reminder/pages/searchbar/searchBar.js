@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import fetch from "unfetch";
 
-
 const SearchBar = (props) => {
+	const { reminders } = props;
 	const [search, setSearch] = useState("");
 	
-	const handleClickSearch = () => {
-		fetch(`http://localhost:3001/reminder/search/${ search }`).then((res) => {
-			console.log(res.data);
-			//TODO don't forget to change the log with real data
-		}).catch((err) => {
-			console.log(err);
-		});
+	const handleClickSearch = async () => {
+		const result = await fetch(`http://localhost:3001/reminder/search/${ search }`);
+		const searchedData = await result.json();
+		return searchedData;
 	};
-
+    
 	const handleChangeSearch = (e) => setSearch(e.target.value);
-	
+
 	return (
 		<>
 			<input type="text" placeholder="search..." value={search} onChange={handleChangeSearch}></input>
@@ -23,6 +20,5 @@ const SearchBar = (props) => {
 		</>
 	);
 };
-
 
 export default SearchBar;
