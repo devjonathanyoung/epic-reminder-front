@@ -6,9 +6,8 @@ const fetcher = async (ressource) => {
 	return await response.json();
 };
 
-
-const useReminderList = () => {
-	const { data, error } = useSWR("http://localhost:3001/reminder", fetcher);
+const useReminderList = (sortOn, isAsc, search, type) => {
+	const { data, error } = useSWR(`http://localhost:3001/reminder?sort=${sortOn}&order=${isAsc}&search=${search}&type=${type}`, fetcher);
 	return {
 		reminders: data,
 		isLoading: !error && !data,
