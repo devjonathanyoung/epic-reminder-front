@@ -7,13 +7,13 @@ const fetcher = async (ressource) => {
 };
 
 
-const useReminderList = () => {
-	const { data, error } = useSWR("http://localhost:3001/reminder", fetcher);
+const useOneReminder = (idReminder) => {
+	const { data, error } = useSWR(`http://localhost:3001/reminder/${ idReminder }`, fetcher);
 	return {
-		reminders: data,
+		reminder: data,
 		isLoading: !error && !data,
 		isError: error
 	};
 };
 
-export default useReminderList;
+export default useOneReminder;

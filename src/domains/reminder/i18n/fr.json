@@ -1,0 +1,11 @@
+{
+    "main-page" : {
+        "title": "Ma liste de Reminders"
+    },
+    "card": {
+        "name": "Titre : ",
+        "type": "Type: ",
+        "release-date": "Date de sortie: ",
+        "comment": "Commentaire: "
+    }
+}
