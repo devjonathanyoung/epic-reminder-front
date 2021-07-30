@@ -42,7 +42,6 @@ const ReminderListPage = () => {
 		}));
 	};
 
-
 	const typesReminder = ["book", "game", "movie", "all"];
 
 	const handleReminderNotFound = () => {
