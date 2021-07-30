@@ -23,7 +23,7 @@ const App = () => {
 					fetcher
 				}}
 			>
-				<h1>EPIC REMINDER</h1>
+				
 				<Router>
 					<Switch>
 						<Route exact path="/" component={ReminderListPage}/>

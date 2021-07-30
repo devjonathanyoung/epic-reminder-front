@@ -1,0 +1,98 @@
+.header {
+    grid-area: header;
+
+    font-size: 1.4rem;
+    height: 7rem;
+    background-color: #fff;
+    border-bottom: 0.1rem solid var(--color-grey-light-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+        &__logo {
+            height: 3.25rem;
+            margin-left: 2rem;
+        }
+
+        &__user {
+            height: 3.75rem;
+            border-radius: 70%;
+            margin-right: 2rem;
+        }
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: var(--color-grey-dark-2);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-evenly;
+}
+
+.side-nav {
+    font-size: 1.4rem;
+    margin-top: 3.5rem;
+    
+        &__sort {
+            position: relative;
+
+            &:not(:last-child) {
+                margin-bottom: 2rem;
+            }
+        };
+
+        &__sort::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: .3rem;
+            background-color: var(--color-main-primary);
+            transform: scaleY(0);
+            transition: transform .2s,
+                        width .4s cubic-bezier(1, 0, 0, 1) .2s;
+        }
+        
+        &__sort:hover::before,
+        &__sort--active::before {
+            transform: scaleY(1);
+            width: 100%;
+        }
+
+        &__link:link,
+        &__link:visited {
+            color: var(---color-grey-light-1);
+            text-decoration: none;
+            text-transform: uppercase;
+            display: block;
+            padding: 1.5rem 2rem;
+            position:relative;
+            z-index: 100;
+        }
+
+        &__filter {
+            background-color: var(--color-main-primary);
+            margin-top: 5rem;
+            
+            &--item{
+                font-weight: 600;
+                text-transform: uppercase;
+                cursor: pointer;
+                padding: 1.5rem 2rem;
+                transition: all .4s ease;
+            }
+            
+            &--item:hover {
+                background-color: var(--color-grey-dark-2);
+            }
+        }
+}
+
+.content { 
+    grid-area: content;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: 7rem;
+}
