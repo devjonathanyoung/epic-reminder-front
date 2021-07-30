@@ -6,34 +6,8 @@ import { useTranslation } from "react-i18next";
 import SearchBar from "../../components/searchbar/searchBar";
 
 const ReminderListPage = () => {
-	// const [ isAsc, setIsAsc] = useState("desc");
-	// const [ sortOn, setSortOn] = useState("date");
-	// const [ type, setType] = useState("all");
-	// const [ search, setSearch ] = useState("");
-
-	// const { reminders, isLoading, isError } = useReminderList(sortOn, isAsc, search, type);
-	
-	// const handleSort = (fieldToSortOn) => {
-	// 	if (isAsc === "asc"){
-	// 		setIsAsc("desc");
-	// 	} else {
-	// 		setIsAsc("asc");
-	// 	} 
-	// 	setSortOn(fieldToSortOn);
-	// 	  };  
-
-	// const handleType = (typeToFilter) => {
-	// 	setType(typeToFilter);
-	// };
-
-	// TEST REFACTO
-
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
 	const { reminders, isLoading, isError } = useReminderList(filter);
-
-const ReminderListPage = () => {
-	const { reminders, isLoading, isError } = useReminderList();
-	const [listReminders, setListReminders] = useState(reminders);
 	const { t } = useTranslation();
 	const handleSort = (fieldToSortOn) => {
 		if (filter.isAsc === "asc"){
@@ -67,20 +41,15 @@ const ReminderListPage = () => {
 
 	const handleReminderNotFound = () => {
 	 if (filter.type === "all") {
-			//  if (type === "all") {
 			return "No reminder yet.";
 		} else {
 			return `No reminder of type ${filter.type} yet.`;
-			// return `No reminder of type ${type} yet.`;
-
 		};
 	};
 
 	return(
 		<div>
 			<h1>{t("reminder:main-page.title")}</h1>
-			<button onClick={sortByName}>Sort by name</button>
-			<button> <Link className="link" to="/reminder/create">Add a new reminder</Link></button>
 
 			<SearchBar setSearch={setSearch}/>
 
