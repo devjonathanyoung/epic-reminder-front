@@ -21,14 +21,6 @@ const OneReminderPage = (props) => {
 		return (date?.slice(0,10) ?? "");
 	};
 
-	const handleFormatDate = (date) => {
-		if (date === null) {
-			return "";
-		} else {
-			return date.slice(0,10);
-		}
-	};
-
 	return(
 
 		<div>
