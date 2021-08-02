@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import useReminderList from "../../services/use-reminder-list";
 import { ReminderCard } from "../../index";
 import { useTranslation } from "react-i18next";
-import SearchBar from "../../components/searchbar/searchBar";
+import SearchBar from "../../component/searchbar/searchBar";
 import "../reminder-list-page/reminder-list-page.scss";
 import "../../../core/theme/reset.scss";
 import logo from "../../../../img/logo_large.png";
