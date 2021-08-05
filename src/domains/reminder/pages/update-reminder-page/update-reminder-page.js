@@ -2,6 +2,9 @@ import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import useOneReminder from "../../services/use-one-reminder";
 import updateReminder from "../../services/update-reminder";
+import TopNavigation from "../../../core/component/top-navigation/top-navigation";
+import Sidebar from "../../../core/component/sidebar/sidebar";
+import "./update-reminder-page.scss";
 
 const FormUpdateReminder = (props) => {
 	const idReminder = props.match.params.id;
@@ -35,7 +38,6 @@ const FormUpdateReminder = (props) => {
 		return formIsValid;
 	};
 
-
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (handleValidation()) {
@@ -52,12 +54,16 @@ const FormUpdateReminder = (props) => {
 	};	
 
 	return(
-		<div>
+		<div className="container">
+
+			<TopNavigation />
+			<Sidebar />
+
 			{ !isLoading && !isError && <div>
 				<h1>Update your reminder</h1>
 				<form onSubmit={handleSubmit}>
-					<div className="form__group">
-						<label className="form__label" htmlFor="name"> Name</label>
+					<div>
+						<label htmlFor="name"> Name</label>
 						<input
 							value={update.name}
 							name="name"
@@ -67,8 +73,8 @@ const FormUpdateReminder = (props) => {
 							required
 						/>
 					</div>
-					<div className="form__group">
-						<label className="form__label" htmlFor="type"> Type</label>
+					<div>
+						<label htmlFor="type"> Type</label>
 						<select
 							value={update.type}
 							name="type"
@@ -80,8 +86,8 @@ const FormUpdateReminder = (props) => {
 							<option value="movie">Movie</option>
 						</select>
 					</div>
-					<div className="form__group">
-						<label className="form__label" htmlFor="date"> Date</label>
+					<div>
+						<label htmlFor="date"> Date</label>
 						<input
 							value={update.date ? update.date.slice(0,10) : ""}
 							type="date"
@@ -89,8 +95,8 @@ const FormUpdateReminder = (props) => {
 							onChange ={handleChange}
 						/>
 					</div>
-					<div className="form__group">
-						<label className="form__label" htmlFor="comment"> Comment</label>
+					<div>
+						<label htmlFor="comment"> Comment</label>
 						<input
 							value={update.comment || ""}
 							type="text"
@@ -99,9 +105,9 @@ const FormUpdateReminder = (props) => {
 							onChange ={handleChange}
 						/>
 					</div>
-					<button type="submit" >Update</button>
+					<button type="submit">Update</button>
 				</form>
-				<Link className="link" to={"/"}>Back to the list</Link>
+				<Link to={"/"}>Back to the list</Link>
 			</div>}   
 		</div>
 	);

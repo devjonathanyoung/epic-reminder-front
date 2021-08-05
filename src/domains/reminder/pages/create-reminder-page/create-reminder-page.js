@@ -1,7 +1,9 @@
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import createReminder from "../../services/create-one";
- 
+import TopNavigation from "../../../core/component/top-navigation/top-navigation";
+import Sidebar from "../../../core/component/sidebar/sidebar";
+import "./create-reminder-page.scss";
 
 const FormCreateReminder = (props) => {
 	const [reminder, setReminder] = useState({});
@@ -48,13 +50,16 @@ const FormCreateReminder = (props) => {
 		}
 	};			
 
-
 	return(
-		<div>
-			<h1>Add a new reminder</h1>
+		<div className="container">
+
+			<TopNavigation />
+			<Sidebar />
+
 			<form onSubmit={handleSubmit}>
-				<div className="form__group">
-					<label className="form__label" htmlFor="name"> Name</label>
+				<h1>Add a new reminder</h1>
+				<div>
+					<label htmlFor="name"> Name</label>
 					<input
 						value={reminder.name || ""}
 						name="name"
@@ -64,8 +69,8 @@ const FormCreateReminder = (props) => {
 						required
 					/>
 				</div>
-				<div className="form__group">
-					<label className="form__label" htmlFor="type"> Type</label>
+				<div>
+					<label htmlFor="type"> Type</label>
 					<select
 						name="type"
 						onChange ={handleChange}
@@ -77,8 +82,8 @@ const FormCreateReminder = (props) => {
 						<option value="movie">Movie</option>
 					</select>
 				</div>
-				<div className="form__group">
-					<label className="form__label" htmlFor="date"> Date</label>
+				<div>
+					<label htmlFor="date"> Date</label>
 					<input
 						value={reminder.date || ""}
 						type="date"
@@ -86,8 +91,8 @@ const FormCreateReminder = (props) => {
 						onChange ={handleChange}
 					/>
 				</div>
-				<div className="form__group">
-					<label className="form__label" htmlFor="comment"> Comment</label>
+				<div>
+					<label htmlFor="comment"> Comment</label>
 					<input
 						value={reminder.comment || ""}
 						type="text"
@@ -97,8 +102,8 @@ const FormCreateReminder = (props) => {
 					/>
 				</div>
 				<button type="submit">Create</button>
+				<Link to={"/"}>Back to the list</Link>
 			</form>
-			<Link className="link" to={"/"}>Back to the list</Link>
 		</div>
 	);
 };

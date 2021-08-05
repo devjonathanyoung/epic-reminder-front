@@ -18,7 +18,7 @@
         color: inherit;
         display: flex;
         flex-direction: column;
-        justify-content: start;
+        justify-content: flex-start;
         font-size: 1.3rem;
         line-height: 2.5;
 
@@ -27,7 +27,6 @@
         }
 
     }
-
 
     &__action {
         display: flex;
@@ -40,5 +39,4 @@
             margin: 0 .5rem 0 2rem;
         }
     }
-
-}
+};

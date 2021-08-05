@@ -1,6 +1,5 @@
 import fetch from "unfetch";
 
-
 const createReminder = async(reminder) => {
 	const response = await fetch("http://localhost:3001/reminder", {
 		method: "POST",

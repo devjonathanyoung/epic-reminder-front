@@ -8,7 +8,6 @@ import i18nReminder from "../reminder/i18n/fr.json";
 
 i18next.addResourceBundle("fr", "reminder", i18nReminder);
 
-
 export {
 	ReminderListPage,
 	OneReminderPage,

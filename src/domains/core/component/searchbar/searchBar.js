@@ -19,15 +19,13 @@ const SearchBar = ({ setSearch }) => {
 	};
 
 	return (
-		<>
-			<div className="search">
-				<input type="search" placeholder="search..." className="search__input" onKeyPress={handleEnter} 
-					value={tempSearch} onChange={handleChangeSearch}></input>
-				<button className="search__button" onClick={handleClickSearch}>
-					<Icon icon="magnifying-glass" className="search__icon" />
-				</button>
-			</div>
-		</>
+		<div className="search">
+			<input type="search" placeholder="search..." className="search__input" onKeyPress={handleEnter} 
+				value={tempSearch} onChange={handleChangeSearch}></input>
+			<button className="search__button" onClick={handleClickSearch}>
+				<Icon icon="magnifying-glass" className="search__icon" />
+			</button>
+		</div>
 	);
 };
 
