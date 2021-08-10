@@ -12,11 +12,7 @@ const ReminderCard = (props) => {
 	};
 
 	const handleFormatDate = (date) => {
-		if (date === null) {
-			return "";
-		} else {
-			return date.slice(0,10);
-		}
+		return (date?.slice(0,10) ?? "");
 	};
 
 
