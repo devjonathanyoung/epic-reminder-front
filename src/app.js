@@ -15,14 +15,13 @@ const fetcher = async (ressource) => {
 
 const App = () => {
 	return (
-		<div className="App">
+		<div>
 			<SWRConfig
 				value={{
 					refreshInterval: 5000,
 					fetcher
 				}}
 			>
-				<h1>EPIC REMINDER</h1>
 				<Router>
 					<Switch>
 						<Route exact path="/" component={ReminderListPage}/>
@@ -30,6 +29,7 @@ const App = () => {
 						<Route path="/reminder/update/:id" component={FormUpdateReminder}/>
 						<Route path="/reminder/:id" component={OneReminderPage}/>
 					</Switch>
+
 				</Router>
 			</SWRConfig>
 		</div>

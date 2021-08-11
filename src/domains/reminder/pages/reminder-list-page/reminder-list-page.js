@@ -1,14 +1,27 @@
+import React, { useState } from "react";
 import useReminderList from "../../services/use-reminder-list";
 import { ReminderCard } from "../../index";
-import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import SearchBar from "../../components/searchbar/searchBar";
+import ReminderWrapper from "../../component/reminder-layout/reminder-wrapper";
+import TopNavigation from "../../../core/component/top-navigation/top-navigation";
+import SearchBar from "../../../core/component/searchbar/searchBar";
+import Sidebar from "../../../core/component/sidebar/sidebar";
+import ReminderContent from "../../component/reminder-content/reminder-content";
+import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
+import AnimatedBtn from "../../../core/component/sidebar-btn/sidebar-animated-btn";
+import FilterType from "../../../core/component/filter-type/filter-type";
 
 const ReminderListPage = () => {
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
 	const { reminders, isLoading, isError } = useReminderList(filter);
 	const { t } = useTranslation();
+	
+	const setSearch = (newSearch) => {
+		setFilter( (oldState) => ({ 
+			...oldState, search: newSearch 
+		}));
+	};
+	
 	const handleSort = (fieldToSortOn) => {
 		if (filter.isAsc === "asc"){
 			setFilter((oldState) => ({ 
@@ -29,16 +42,6 @@ const ReminderListPage = () => {
 			...oldState, type: newType 
 		}));
 	};
-
-	const setSearch = (newSearch) => {
-		setFilter( (oldState) => ({ 
-			...oldState, search: newSearch 
-		}));
-	};
-
-
-	const typesReminder = ["book", "game", "movie", "all"];
-
 	const handleReminderNotFound = () => {
 	 if (filter.type === "all") {
 			return "No reminder yet.";
@@ -46,31 +49,28 @@ const ReminderListPage = () => {
 			return `No reminder of type ${filter.type} yet.`;
 		};
 	};
-
+	
 	return(
-		<div>
-			<h1>{t("reminder:main-page.title")}</h1>
+		<ReminderWrapper>
+			<TopNavigation>
+				<SearchBar setSearch={setSearch} />
+			</TopNavigation>
 
-			<SearchBar setSearch={setSearch}/>
-
-			<button onClick={() => handleSort("name")}>Sort by name</button>
-			<button onClick={() => handleSort("date")}>Sort by date</button>
-			<button> <Link className="link" to="/reminder/create">Add a new reminder</Link></button>
-			<ul>
-				{typesReminder.length ? (typesReminder.map((typeToFilter, index) => {
-					return (<li key={index}  onClick={() => handleType(typeToFilter)} >{typeToFilter}</li>);
-				})) : ""}
-			</ul>
+			<Sidebar>
+				<ActiveBtn to="/reminder/create" value="Add a new reminder" />
+				<AnimatedBtn handleSortName={() => handleSort("name")} handleSortDate={() => handleSort("date")} />
+				<FilterType handleType={handleType} />
+			</Sidebar>
 			
-			
-			{!isLoading && !isError && reminders.length ? ( reminders.map((reminder) => {
-				return (
-					<ReminderCard key={reminder.id} {...reminder}/>
-				);
-			})) : <h3>{handleReminderNotFound()}</h3>	}
-
-		
-		</div>
+			<ReminderContent>
+				{!isLoading && !isError && reminders.length ? ( reminders.map((reminder) => {
+					return (
+						<ReminderCard key={reminder.id} {...reminder}/>
+					);
+				})) : <h3>{handleReminderNotFound()}</h3>	
+				}
+			</ReminderContent>
+		</ReminderWrapper>
 	);
 };
 

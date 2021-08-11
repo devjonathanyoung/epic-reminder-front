@@ -1,0 +1,21 @@
+.reminder-btn {
+    background-color: #eee;
+    color: var(--color-main-primary);
+    border: none;
+    width: 10rem;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border-radius: .4rem;
+    text-decoration: none;
+    color: var(--color-main-primary);
+  
+      &:hover {
+          background-color: var(--color-main-primary);
+          color: #eee;
+          transition: all .4s;
+        }
+        
+      &:active {
+        transform: translateY(-.5rem);
+      }
+  };

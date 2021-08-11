@@ -1,0 +1,22 @@
+.top-navigation {
+    grid-area: top-navigation;
+    
+    font-size: 1.4rem;
+    height: 7rem;
+    background-color: #fff;
+    border-bottom: 0.1rem solid var(--color-grey-light-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    &__logo {
+      height: 3.25rem;
+      margin-left: 2rem;
+    }
+    
+    &__user {
+      height: 3.75rem;
+      border-radius: 70%;
+      margin-right: 2rem;
+    }
+  };

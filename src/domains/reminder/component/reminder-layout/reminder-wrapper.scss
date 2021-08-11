@@ -1,0 +1,11 @@
+.page-wrap {
+  display: grid;
+  grid-template-areas:
+  "top-navigation top-navigation"
+  "sidebar main-content";
+
+  grid-template-columns: 20rem 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+  max-width: 100vw;
+};
