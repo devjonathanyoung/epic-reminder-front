@@ -1,9 +1,9 @@
 import React from "react";
 import "./reminder-btn.scss";
 
-const ReminderBtn = ({ children }) => {
+const ReminderBtn = ({ children, handleDeleteClick }) => {
 	return (
-		<button className="reminder-btn">{children}</button>
+		<button onClick={handleDeleteClick} className="reminder-btn">{children}</button>
 	);
 };
 

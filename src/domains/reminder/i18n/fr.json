@@ -4,8 +4,52 @@
     },
     "card": {
         "name": "Titre : ",
-        "type": "Type: ",
+        "type": "Genre: ",
         "release-date": "Date de sortie: ",
         "comment": "Commentaire: "
+    },
+    "create": {
+        "back": "Retour à la liste",
+        "home": "Accueil >",
+        "title": "Ajouter un nouveau rappel",
+        "name": "Titre",
+        "type": "Genre",
+        "select": "Sélectionnez un genre",
+        "book": "Livre",
+        "game": "Jeu",
+        "movie": "Film",
+        "date": "Date",
+        "comment": "Commentaire",
+        "create": "Créer"
+    },
+    "one": {
+        "back": "Retour à la liste",
+        "home": "Accueil >",
+        "title": "Détails du rappel",
+        "type": "Genre",
+        "date": "Date de sortie",
+        "comment": "Commentaire",
+        "update": "Modifier",
+        "delete": "Supprimer"
+    },
+    "update": {
+        "back": "Retour à la liste",
+        "home": "Accueil >",
+        "title": "Modifier le rappel",
+        "name": "Titre",
+        "type": "Genre",
+        "book": "Livre",
+        "game": "Jeu",
+        "movie": "Film",
+        "date": "Date",
+        "comment": "Commentaire",
+        "update": "Modifier"
+    },
+    "sort": {
+        "name": "Trier par nom",
+        "date": "Trier par date"
+    },
+    "search": {
+        "search": "rechercher"
     }
 }

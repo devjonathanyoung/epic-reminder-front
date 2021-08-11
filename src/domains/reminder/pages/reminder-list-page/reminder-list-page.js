@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import useReminderList from "../../services/use-reminder-list";
 import { ReminderCard } from "../../index";
-import { useTranslation } from "react-i18next";
-import ReminderWrapper from "../../component/reminder-layout/reminder-wrapper";
+import ReminderWrapper from "../../component/reminder-wrapper/reminder-wrapper";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import SearchBar from "../../../core/component/searchbar/searchBar";
 import Sidebar from "../../../core/component/sidebar/sidebar";
@@ -14,7 +13,6 @@ import FilterType from "../../../core/component/filter-type/filter-type";
 const ReminderListPage = () => {
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
 	const { reminders, isLoading, isError } = useReminderList(filter);
-	const { t } = useTranslation();
 	
 	const setSearch = (newSearch) => {
 		setFilter( (oldState) => ({ 
