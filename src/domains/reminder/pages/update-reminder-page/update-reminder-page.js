@@ -1,9 +1,12 @@
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import useOneReminder from "../../services/use-one-reminder";
 import updateReminder from "../../services/update-reminder";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import Sidebar from "../../../core/component/sidebar/sidebar";
+import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
+import Breadcrumb from "../../../core/component/breadcrumb/breadcrumb";
+import ReminderBtn from "../../component/reminder-btn/reminder-btn";
 import "./update-reminder-page.scss";
 
 const FormUpdateReminder = (props) => {
@@ -54,16 +57,22 @@ const FormUpdateReminder = (props) => {
 	};	
 
 	return(
-		<div className="container">
+		<div className="page-wrap">
 
 			<TopNavigation />
-			<Sidebar />
+			<Sidebar>
+				<ActiveBtn to="/" value="Back to the list" />
+			</Sidebar>
 
 			{ !isLoading && !isError && <div>
-				<h1>Update your reminder</h1>
-				<form onSubmit={handleSubmit}>
-					<div>
-						<label htmlFor="name"> Name</label>
+
+				<Breadcrumb to="/" path="Home >" page="Update the reminder" />
+
+				<h1>Update the reminder</h1>
+
+				<form className="reminder-application" onSubmit={handleSubmit}>
+					<div className="reminder-application--entry">
+						<label htmlFor="name">Name</label>
 						<input
 							value={update.name}
 							name="name"
@@ -71,10 +80,12 @@ const FormUpdateReminder = (props) => {
 							placeholder="Name"
 							onChange ={handleChange}
 							required
+							className="reminder-application--entry-validation"
 						/>
 					</div>
-					<div>
-						<label htmlFor="type"> Type</label>
+
+					<div className="reminder-application--entry">
+						<label htmlFor="type">Type</label>
 						<select
 							value={update.type}
 							name="type"
@@ -86,8 +97,9 @@ const FormUpdateReminder = (props) => {
 							<option value="movie">Movie</option>
 						</select>
 					</div>
-					<div>
-						<label htmlFor="date"> Date</label>
+
+					<div className="reminder-application--entry">
+						<label htmlFor="date">Date</label>
 						<input
 							value={update.date ? update.date.slice(0,10) : ""}
 							type="date"
@@ -95,9 +107,10 @@ const FormUpdateReminder = (props) => {
 							onChange ={handleChange}
 						/>
 					</div>
-					<div>
-						<label htmlFor="comment"> Comment</label>
-						<input
+
+					<div className="reminder-application--entry reminder-application--entry-comment">
+						<label htmlFor="comment">Comment</label>
+						<textarea
 							value={update.comment || ""}
 							type="text"
 							name="comment"
@@ -105,9 +118,8 @@ const FormUpdateReminder = (props) => {
 							onChange ={handleChange}
 						/>
 					</div>
-					<button type="submit">Update</button>
+					<ReminderBtn className="reminder-btn" type="submit">Update</ReminderBtn>
 				</form>
-				<Link to={"/"}>Back to the list</Link>
 			</div>}   
 		</div>
 	);

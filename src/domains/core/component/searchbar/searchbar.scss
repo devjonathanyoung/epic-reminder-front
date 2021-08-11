@@ -4,7 +4,7 @@
     align-items: center;
     flex: 0 0 40%;
 
-    &__input {
+    &__box {
         font-size: 1.4rem;
         background-color: var(--color-grey-light-1);
         border: none;
@@ -26,11 +26,11 @@
         }
     };
 
-    &__input:focus + &__button {
+    &__box:focus + &__btn {
         background-color: var(--color-grey-light-2);
     }
 
-    &__button {
+    &__btn {
         border: none;
         background-color: var(--color-grey-light-1);
 
@@ -44,8 +44,6 @@
     };
 
     &__icon {
-        height: 2rem;
-        width: 2rem;
-        color: var(--color-grey-dark-1);
+        fill: var(--color-grey-dark-1);
     };
 };

@@ -1,9 +1,12 @@
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import createReminder from "../../services/create-one";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import Sidebar from "../../../core/component/sidebar/sidebar";
-import "./create-reminder-page.scss";
+import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
+import Breadcrumb from "../../../core/component/breadcrumb/breadcrumb";
+import ReminderBtn from "../../component/reminder-btn/reminder-btn";
+import "../update-reminder-page/update-reminder-page.scss";
 
 const FormCreateReminder = (props) => {
 	const [reminder, setReminder] = useState({});
@@ -51,59 +54,70 @@ const FormCreateReminder = (props) => {
 	};			
 
 	return(
-		<div className="container">
+		<div className="page-wrap">
 
 			<TopNavigation />
-			<Sidebar />
+			<Sidebar>
+				<ActiveBtn to="/" value="Back to the list" />
+			</Sidebar>
 
-			<form onSubmit={handleSubmit}>
+			<div>
+				<Breadcrumb to="/" path="Home >" page="Add a new reminder" />
+				
 				<h1>Add a new reminder</h1>
-				<div>
-					<label htmlFor="name"> Name</label>
-					<input
-						value={reminder.name || ""}
-						name="name"
-						type="text"
-						placeholder="Name"
-						onChange ={handleChange}
-						required
-					/>
-				</div>
-				<div>
-					<label htmlFor="type"> Type</label>
-					<select
-						name="type"
-						onChange ={handleChange}
-						required
-					>
-						<option value="">Select a type</option>
-						<option value="book">Book</option>
-						<option value="game">Game</option>
-						<option value="movie">Movie</option>
-					</select>
-				</div>
-				<div>
-					<label htmlFor="date"> Date</label>
-					<input
-						value={reminder.date || ""}
-						type="date"
-						name="date"
-						onChange ={handleChange}
-					/>
-				</div>
-				<div>
-					<label htmlFor="comment"> Comment</label>
-					<input
-						value={reminder.comment || ""}
-						type="text"
-						name="comment"
-						placeholder="Comment"
-						onChange ={handleChange}
-					/>
-				</div>
-				<button type="submit">Create</button>
-				<Link to={"/"}>Back to the list</Link>
-			</form>
+
+				<form className="reminder-application" onSubmit={handleSubmit}>
+				
+					<div className="reminder-application--entry">
+						<label htmlFor="name"> Name</label>
+						<input
+							value={reminder.name || ""}
+							name="name"
+							type="text"
+							placeholder="Name"
+							onChange ={handleChange}
+							required
+							className="reminder-application--entry-validation"
+						/>
+					</div>
+
+					<div className="reminder-application--entry">
+						<label htmlFor="type"> Type</label>
+						<select
+							name="type"
+							onChange ={handleChange}
+							required
+						>
+							<option value="">Select a type</option>
+							<option value="book">Book</option>
+							<option value="game">Game</option>
+							<option value="movie">Movie</option>
+						</select>
+					</div>
+
+					<div className="reminder-application--entry">
+						<label htmlFor="date"> Date</label>
+						<input
+							value={reminder.date || ""}
+							type="date"
+							name="date"
+							onChange ={handleChange}
+						/>
+					</div>
+
+					<div className="reminder-application--entry reminder-application--entry-comment">
+						<label htmlFor="comment">Comment</label>
+						<textarea
+							value={reminder.comment || ""}
+							type="text"
+							name="comment"
+							placeholder="Comment"
+							onChange ={handleChange}
+						/>
+					</div>
+					<ReminderBtn className="reminder-btn" type="submit">Create</ReminderBtn>
+				</form>
+			</div>
 		</div>
 	);
 };

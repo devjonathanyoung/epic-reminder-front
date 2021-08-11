@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import Icon from "./icon";
-import "./selection.json";
+import Icon from "../icon/icon";
 import "./searchbar.scss";
 
 const SearchBar = ({ setSearch }) => {
@@ -20,10 +19,10 @@ const SearchBar = ({ setSearch }) => {
 
 	return (
 		<div className="search">
-			<input type="search" placeholder="search..." className="search__input" onKeyPress={handleEnter} 
+			<input type="search" placeholder="search..." className="search__box" onKeyPress={handleEnter} 
 				value={tempSearch} onChange={handleChangeSearch}></input>
-			<button className="search__button" onClick={handleClickSearch}>
-				<Icon icon="magnifying-glass" className="search__icon" />
+			<button className="search__btn" onClick={handleClickSearch}>
+				<Icon name="magnifying-glass" className="search__icon" />
 			</button>
 		</div>
 	);

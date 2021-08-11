@@ -15,7 +15,7 @@ const fetcher = async (ressource) => {
 
 const App = () => {
 	return (
-		<div className="app">
+		<div>
 			<SWRConfig
 				value={{
 					refreshInterval: 5000,

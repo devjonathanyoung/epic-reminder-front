@@ -1,0 +1,46 @@
+.reminder-application {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-grey-light-3);
+    padding: 2rem;
+    margin: 2rem;
+    border-radius: .5rem;
+    box-shadow: 0 .2rem .2rem rgba(#000, 0.25);
+        
+    &--entry {
+        display: flex;
+        flex-direction: column;
+        margin: 1rem 0;
+        
+            &-comment {
+                    resize: vertical;
+            }
+
+            &-validation {
+                &:focus {
+                    border-bottom: 0.3rem solid var(--color-valid);
+                  }
+              
+                  &:focus:invalid {
+                    border-bottom: 0.3rem solid var(--color-invalid);
+                  }
+            }
+        }
+};
+
+h1 {
+    margin: 2rem;
+};
+
+label {
+    margin-bottom: .5rem;
+};
+
+select, input, textarea {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: .4rem;
+    font-family: inherit;
+    outline: none;
+};
+    

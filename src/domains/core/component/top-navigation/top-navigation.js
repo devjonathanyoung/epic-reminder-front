@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import logo from "../../../../img/logo_large.png";
 import user from "../../../../img/Jon_Snow.png";
 import "./top-navigation.scss";
-import "../../../core/theme/reset.scss";
 
 const TopNavigation = ({ children }) => {
 	return (

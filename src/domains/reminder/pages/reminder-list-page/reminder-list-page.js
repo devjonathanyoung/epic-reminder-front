@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import useReminderList from "../../services/use-reminder-list";
 import { ReminderCard } from "../../index";
-// import { useTranslation } from "react-i18next";
-import "../../../core/theme/reset.scss";
+import { useTranslation } from "react-i18next";
+import ReminderWrapper from "../../component/reminder-layout/reminder-wrapper";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import SearchBar from "../../../core/component/searchbar/searchBar";
 import Sidebar from "../../../core/component/sidebar/sidebar";
+import ReminderContent from "../../component/reminder-content/reminder-content";
+import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
+import AnimatedBtn from "../../../core/component/sidebar-btn/sidebar-animated-btn";
+import FilterType from "../../../core/component/filter-type/filter-type";
 
 const ReminderListPage = () => {
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
 	const { reminders, isLoading, isError } = useReminderList(filter);
-	// const { t } = useTranslation();
+	const { t } = useTranslation();
 	
 	const setSearch = (newSearch) => {
 		setFilter( (oldState) => ({ 
@@ -47,22 +51,26 @@ const ReminderListPage = () => {
 	};
 	
 	return(
-		<div className="container">
+		<ReminderWrapper>
 			<TopNavigation>
 				<SearchBar setSearch={setSearch} />
 			</TopNavigation>
 
-			<Sidebar handleSortName={() => handleSort("name")} handleSortDate={() => handleSort("date")} handleType={handleType} />
-
-			<div className="content">
+			<Sidebar>
+				<ActiveBtn to="/reminder/create" value="Add a new reminder" />
+				<AnimatedBtn handleSortName={() => handleSort("name")} handleSortDate={() => handleSort("date")} />
+				<FilterType handleType={handleType} />
+			</Sidebar>
+			
+			<ReminderContent>
 				{!isLoading && !isError && reminders.length ? ( reminders.map((reminder) => {
 					return (
 						<ReminderCard key={reminder.id} {...reminder}/>
 					);
 				})) : <h3>{handleReminderNotFound()}</h3>	
 				}
-			</div>
-		</div>
+			</ReminderContent>
+		</ReminderWrapper>
 	);
 };
 
