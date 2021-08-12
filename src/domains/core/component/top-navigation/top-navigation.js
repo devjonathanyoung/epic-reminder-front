@@ -7,9 +7,13 @@ import "./top-navigation.scss";
 const TopNavigation = ({ children }) => {
 	return (
 		<header className="top-navigation">
-			<Link to={"/"}><img src={logo} alt="reminder poster" className="top-navigation__logo"/></Link>
+			<Link to={"/"}>
+				<img src={logo} alt="reminder poster" className="top-navigation__logo"/>
+			</Link>
 			{ children }
-			<img src={user} alt="user profile" className="top-navigation__user" />
+			<Link to={"/sign-in"}>
+				<img src={user} alt="user-profile" className="top-navigation__user"/>
+			</Link>
 		</header>
 	);
 };

@@ -1,9 +1,10 @@
 import React from "react";
 import "./reminder-btn.scss";
 
-const ReminderBtn = ({ children, handleDeleteClick }) => {
+const ReminderBtn = (props) => {
+	const { className, children,  handleDeleteClick } = props;
 	return (
-		<button onClick={handleDeleteClick} className="reminder-btn">{children}</button>
+		<button className={`reminder-btn ${className}`} onClick={handleDeleteClick}>{children}</button>
 	);
 };
 
