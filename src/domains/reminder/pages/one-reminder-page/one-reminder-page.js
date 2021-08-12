@@ -7,12 +7,14 @@ import Breadcrumb from "../../../core/component/breadcrumb/breadcrumb";
 import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
 import ReminderBtn from "../../component/reminder-btn/reminder-btn";
 import LinkButton from "../../component/reminder-details-btn/reminder-details-btn";
+import { useTranslation } from "react-i18next";
 import "./one-reminder-page.scss";
 
 const OneReminderPage = (props) => {
 	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const history = useHistory(); 
+	const { t } = useTranslation();
 
 	const handleDelete = (id) => {
 		deleteReminder(id)
@@ -33,19 +35,19 @@ const OneReminderPage = (props) => {
 			
 			<TopNavigation />
 			<Sidebar>
-				<ActiveBtn to="/" value="Back to the list" />
+				<ActiveBtn to="/" value={t("reminder:one.back")} />
 			</Sidebar>
 
 			{ !isLoading && !isError && <div>
-				<Breadcrumb to="/" path="Home >" page="Reminder details" />
+				<Breadcrumb to="/" path={t("reminder:one.home")} page={t("reminder:one.title")} />
 
 				<section className="reminder-details">
 					<h1>{reminder.name}</h1>
-					<div>Type: {reminder.type}</div>
-					<div>Date of release: {handleFormatDate(reminder.date)} </div>
-					<p>Comment: {reminder.comment}</p>
-					<LinkButton className="reminder-btn" to={`/reminder/update/${ idReminder }`}>Update</LinkButton>
-					<ReminderBtn className="reminder-btn" onClick={() => handleDelete(idReminder)}>Delete</ReminderBtn>
+					<div>{t("reminder:one.type")}: {reminder.type}</div>
+					<div>{t("reminder:one.date")}: {handleFormatDate(reminder.date)} </div>
+					<p>{t("reminder:one.comment")}: {reminder.comment}</p>
+					<LinkButton className="reminder-btn" to={`/reminder/update/${ idReminder }`}>{t("reminder:one.update")}</LinkButton>
+					<ReminderBtn className="reminder-btn" handleDeleteClick={() => handleDelete(idReminder)}>{t("reminder:one.delete")}</ReminderBtn>
 				</section>
 			</div>}
 		</div>

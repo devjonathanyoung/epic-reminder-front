@@ -7,12 +7,14 @@ import Sidebar from "../../../core/component/sidebar/sidebar";
 import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
 import Breadcrumb from "../../../core/component/breadcrumb/breadcrumb";
 import ReminderBtn from "../../component/reminder-btn/reminder-btn";
+import { useTranslation } from "react-i18next";
 import "./update-reminder-page.scss";
 
 const FormUpdateReminder = (props) => {
 	const idReminder = props.match.params.id;
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const history = useHistory(); 
+	const { t } = useTranslation();
 
 	const [update, setUpdate] = useState( { ...reminder } );
 	const handleChange = ({ target }) => {
@@ -61,23 +63,23 @@ const FormUpdateReminder = (props) => {
 
 			<TopNavigation />
 			<Sidebar>
-				<ActiveBtn to="/" value="Back to the list" />
+				<ActiveBtn to="/" value={t("reminder:update.back")} />
 			</Sidebar>
 
 			{ !isLoading && !isError && <div>
 
-				<Breadcrumb to="/" path="Home >" page="Update the reminder" />
+				<Breadcrumb to="/" path={t("reminder:update.home")} page={t("reminder:update.title")} />
 
-				<h1>Update the reminder</h1>
+				<h1>{t("reminder:update.title")}</h1>
 
 				<form className="reminder-application" onSubmit={handleSubmit}>
 					<div className="reminder-application--entry">
-						<label htmlFor="name">Name</label>
+						<label htmlFor="name">{t("reminder:update.name")}</label>
 						<input
 							value={update.name}
 							name="name"
 							type="text"
-							placeholder="Name"
+							placeholder={t("reminder:update.name")}
 							onChange ={handleChange}
 							required
 							className="reminder-application--entry-validation"
@@ -85,21 +87,21 @@ const FormUpdateReminder = (props) => {
 					</div>
 
 					<div className="reminder-application--entry">
-						<label htmlFor="type">Type</label>
+						<label htmlFor="type">{t("reminder:update.type")}</label>
 						<select
 							value={update.type}
 							name="type"
 							onChange ={handleChange}
 							required
 						>
-							<option value="book">Book</option>
-							<option value="game">Game</option>
-							<option value="movie">Movie</option>
+							<option value="book">{t("reminder:update.book")}</option>
+							<option value="game">{t("reminder:update.game")}</option>
+							<option value="movie">{t("reminder:update.movie")}</option>
 						</select>
 					</div>
 
 					<div className="reminder-application--entry">
-						<label htmlFor="date">Date</label>
+						<label htmlFor="date">{t("reminder:update.date")}</label>
 						<input
 							value={update.date ? update.date.slice(0,10) : ""}
 							type="date"
@@ -109,16 +111,16 @@ const FormUpdateReminder = (props) => {
 					</div>
 
 					<div className="reminder-application--entry reminder-application--entry-comment">
-						<label htmlFor="comment">Comment</label>
+						<label htmlFor="comment">{t("reminder:update.comment")}</label>
 						<textarea
 							value={update.comment || ""}
 							type="text"
 							name="comment"
-							placeholder="Comment"
+							placeholder={t("reminder:update.comment")}
 							onChange ={handleChange}
 						/>
 					</div>
-					<ReminderBtn className="reminder-btn" type="submit">Update</ReminderBtn>
+					<ReminderBtn className="reminder-btn" type="submit">{t("reminder:update.update")}</ReminderBtn>
 				</form>
 			</div>}   
 		</div>

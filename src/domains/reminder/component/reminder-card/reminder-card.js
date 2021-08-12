@@ -31,8 +31,8 @@ const ReminderCard = (props) => {
 				<Link to={`/reminder/update/${ props.id }`}>
 					<Icon name="new-message" className="reminderCard__action--icon" />
 				</Link>
-
-				<Icon onClick={() => handleDelete(props.id)} name="trash" className="reminderCard__action--icon" />
+				
+				<Icon handleDeleteClick={() => handleDelete(props.id)} name="trash" className="reminderCard__action--icon" />
 			</div>
 		</div>
 	);
