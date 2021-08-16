@@ -3,10 +3,10 @@ import iconRef from "../../../../img/sprite.svg";
 import "./icon.scss";
 
 const Icon = (props) => {
-	const { name = "", className = "", handleDeleteClick } = props;
+	const { name = "", className = "", onClick } = props;
 
 	return (
-		<span onClick={handleDeleteClick} className={`icon ${className}`}>
+		<span onClick={onClick} className={`icon ${className}`}>
 			<svg role="img" aria-hidden="true" focusable="false">
 				<use xlinkHref={`${iconRef}#${name}`} />
 			</svg>

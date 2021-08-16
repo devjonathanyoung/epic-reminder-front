@@ -47,7 +47,7 @@ const OneReminderPage = (props) => {
 					<div>{t("reminder:one.date")}: {handleFormatDate(reminder.date)} </div>
 					<p>{t("reminder:one.comment")}: {reminder.comment}</p>
 					<LinkButton className="reminder-btn" to={`/reminder/update/${ idReminder }`}>{t("reminder:one.update")}</LinkButton>
-					<ReminderBtn className="reminder-btn" handleDeleteClick={() => handleDelete(idReminder)}>{t("reminder:one.delete")}</ReminderBtn>
+					<ReminderBtn className="reminder-btn" onClick={() => handleDelete(idReminder)}>{t("reminder:one.delete")}</ReminderBtn>
 				</section>
 			</div>}
 		</div>
