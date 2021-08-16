@@ -8,14 +8,24 @@
     border-radius: .4rem;
     text-decoration: none;
     color: var(--color-main-primary);
-  
+
       &:hover {
           background-color: var(--color-main-primary);
           color: #eee;
           transition: all .4s;
-        }
-        
+      }
       &:active {
         transform: translateY(-.5rem);
       }
-  };
+    };
+    
+.dark {
+  color: #eee;
+  background-color: var(--color-main-dark);
+
+  &:hover {
+    background-color: #eee;
+    color: var(--color-main-dark);
+    transition: all .4s;
+  }
+}        

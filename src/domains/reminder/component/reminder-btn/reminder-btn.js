@@ -2,9 +2,9 @@ import React from "react";
 import "./reminder-btn.scss";
 
 const ReminderBtn = (props) => {
-	const { className, children,  onClick } = props;
+	const { className, children,  onClick, dark } = props;
 	return (
-		<button className={`reminder-btn ${className}`} onClick={onClick}>{children}</button>
+		<button className={`reminder-btn ${className} ${dark ? "dark": ""}`} onClick={onClick}>{children}</button>
 	);
 };
 
