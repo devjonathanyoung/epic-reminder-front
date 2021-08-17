@@ -65,6 +65,7 @@
             "message": "Enter your personal details and start journey with us: ",
             "btn": "Sign Up"
         },
-        "submit-btn": "Submit"
+        "submit-btn": "Submit",
+        "password-error": "Confirmed password is different"
     }
 }

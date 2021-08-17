@@ -17,7 +17,12 @@
       &:active {
         transform: translateY(-.5rem);
       }
-    };
+
+      &:disabled {
+        background-color: var(--color-grey-light-3);
+        color: #eee;
+      }
+};
     
 .dark {
   color: #eee;
