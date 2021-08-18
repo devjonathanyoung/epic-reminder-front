@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import logo from "../../../../img/logo_large.png";
 import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
 import createUser from "../../services/create-user";
+import userLogin from "../../services/user-login";
 import "./sign-in-page.scss";
 
 const SignInPage = () => {
@@ -52,7 +53,14 @@ const SignInPage = () => {
 
 	const handleSignIn = (e) => {
 		e.preventDefault();
-		// API getUser pour vérifier que les ids correspondent bien à cx en BDD
+		userLogin(form)
+			.then(() => {
+				//TODO: changer url de la page d'accueil
+				history.push("/");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 
 	const handleSignUp = (e) => {
