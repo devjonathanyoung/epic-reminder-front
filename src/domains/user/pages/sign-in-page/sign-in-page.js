@@ -1,7 +1,9 @@
 import React, { useState, useEffect }  from "react";
+import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import logo from "../../../../img/logo_large.png";
 import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
+import createUser from "../../services/create-user";
 import "./sign-in-page.scss";
 
 const SignInPage = () => {
@@ -9,6 +11,7 @@ const SignInPage = () => {
 	const [formValid, setFormValid] = useState(false);
 	const [hasError, setHasError] = useState(false);
 	const [signUpClass, setSignUpClass ] = useState(true);
+	const history = useHistory(); 
 	const { t } = useTranslation();
 
 	const handleChange = (e, fieldName) => {
@@ -54,7 +57,14 @@ const SignInPage = () => {
 
 	const handleSignUp = (e) => {
 		e.preventDefault();
-		// API createUser
+		createUser(form)
+			.then(() => {
+				//TODO: changer url de la page d'accueil
+				history.push("/");
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 
 	const toggleSignForm = () => {

@@ -27,6 +27,7 @@ const App = () => {
 			>
 				<Router>
 					<Switch>
+						{/* TODO: changer url de la page d'accueil */}
 						<Route exact path="/" component={ReminderListPage}/>
 						<Route exact path="/sign-in" component={SignInPage}/>
 						<Route path="/reminder/create" component={FormCreateReminder}/>
