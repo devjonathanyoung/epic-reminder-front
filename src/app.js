@@ -6,9 +6,9 @@ import {
 	ReminderListPage, 
 	OneReminderPage, 
 	FormCreateReminder, 
-	FormUpdateReminder,
-	SignInPage 
+	FormUpdateReminder
 } from "./domains/reminder";
+import { SignInPage } from "./domains/user";
 
 const fetcher = async (ressource) => {
 	const response = await fetch(ressource);

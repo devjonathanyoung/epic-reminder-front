@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from "react";
 import { useTranslation } from "react-i18next";
 import logo from "../../../../img/logo_large.png";
-import ReminderBtn from "../../component/reminder-btn/reminder-btn";
+import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
 import "./sign-in-page.scss";
 
 const SignInPage = () => {
@@ -70,7 +70,7 @@ const SignInPage = () => {
 			<div className="sign-main-container">
 
 				<div className="container">
-					<h1>{signUpClass ? t("reminder:sign.in.btn"): t("reminder:sign.up.btn")}</h1>
+					<h1>{signUpClass ? t("user:sign.in.btn"): t("user:sign.up.btn")}</h1>
 					<form className="container__form" onSubmit={signUpClass ? handleSignIn : handleSignUp}>
 						<input 
 							className="container__form__field"
@@ -101,20 +101,20 @@ const SignInPage = () => {
 							value={form.confirmedPassword}
 							onBlur={handleBlur}
 						/>}
-						<div className="container__form__error">{hasError ? t("reminder:sign.password-error") : ""}</div>
-						<ReminderBtn type="submit" disabled={!formValid}>{t("reminder:sign.submit-btn")}</ReminderBtn>
+						<div className="container__form__error">{hasError ? t("user:sign.password-error") : ""}</div>
+						<ReminderBtn type="submit" disabled={!formValid}>{t("user:sign.submit-btn")}</ReminderBtn>
 					</form>
 				</div>
 
 				<div className={`container ${signUpClass ? "sign-up": "sign-in"}`}>
-					<h1>{signUpClass ? t("reminder:sign.up.container-title") : t("reminder:sign.in.container-title")}</h1>
+					<h1>{signUpClass ? t("user:sign.up.container-title") : t("user:sign.in.container-title")}</h1>
 					<div className="message" >
-						{signUpClass ? t("reminder:sign.up.message"): 
-							t("reminder:sign.in.message")
+						{signUpClass ? t("user:sign.up.message"): 
+							t("user:sign.in.message")
 						}
 					</div>
 					<ReminderBtn className="toggle-btn" onClick={toggleSignForm} dark>
-						{signUpClass ? t("reminder:sign.up.btn"): t("reminder:sign.in.btn")}
+						{signUpClass ? t("user:sign.up.btn"): t("user:sign.in.btn")}
 					</ReminderBtn>
 				</div>
 			</div>
