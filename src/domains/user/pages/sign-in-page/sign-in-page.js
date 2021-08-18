@@ -10,7 +10,8 @@ import "./sign-in-page.scss";
 const SignInPage = () => {
 	const [form, setForm] = useState({ firstName: "", password:"" });
 	const [formValid, setFormValid] = useState(false);
-	const [hasError, setHasError] = useState(false);
+	const [pswdNotIdentical, setPswdNotIdentical] = useState(false);
+	const [wrongPassword, setwrongPassword] = useState(false);
 	const [signUpClass, setSignUpClass ] = useState(true);
 	const history = useHistory(); 
 	const { t } = useTranslation();
@@ -42,7 +43,7 @@ const SignInPage = () => {
 	};
 
 	const handleBlur = () => {
-		setHasError(!validateSignUpPassword());
+		setPswdNotIdentical(!validateSignUpPassword());
 	};
 
 	const handleKeyPress = (e) => {
@@ -54,9 +55,14 @@ const SignInPage = () => {
 	const handleSignIn = (e) => {
 		e.preventDefault();
 		userLogin(form)
-			.then(() => {
-				//TODO: changer url de la page d'accueil
-				history.push("/");
+			.then((res) => {
+				console.log("result", res);
+				if(res.error) {
+					setwrongPassword(true);
+				} else {
+					//TODO: changer url de la page d'accueil
+					history.push("/");
+				}
 			})
 			.catch((error) => {
 				console.error(error);
@@ -106,20 +112,23 @@ const SignInPage = () => {
 						/>}
 						<input 
 							type="password"
-							className="container__form__field"
+							className={`container__form__field ${wrongPassword ? "field-error": ""}`}
 							placeholder="Password"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "password")}
 							value={form.password}
 						/>
 						{!signUpClass && <input 
 							type="password"
-							className={`container__form__field ${hasError ? "field-error": ""}`}
+							className={`container__form__field ${pswdNotIdentical ? "field-error": ""}`}
 							placeholder="Confirm Password"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "confirmedPassword")}
 							value={form.confirmedPassword}
 							onBlur={handleBlur}
 						/>}
-						<div className="container__form__error">{hasError ? t("user:sign.password-error") : ""}</div>
+						<div className="container__form__error">
+							{pswdNotIdentical && t("user:sign.password-identical")}
+							{wrongPassword && t("user:sign.password-error")}
+						</div>
 						<ReminderBtn type="submit" disabled={!formValid}>{t("user:sign.submit-btn")}</ReminderBtn>
 					</form>
 				</div>

@@ -13,6 +13,7 @@
             "btn": "Sign Up"
         },
         "submit-btn": "Submit",
-        "password-error": "Confirmed password is different"
+        "password-identical": "Confirmed password is different",
+        "password-error": "Wrong password"
     }
 }
