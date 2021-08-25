@@ -56,7 +56,6 @@ const SignInPage = () => {
 		e.preventDefault();
 		userLogin(form)
 			.then((res) => {
-				console.log("result", res);
 				if(res.error) {
 					setwrongPassword(true);
 				} else {
