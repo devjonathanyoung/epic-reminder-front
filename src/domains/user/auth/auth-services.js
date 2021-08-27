@@ -2,9 +2,6 @@
  * set CSRF protection
  * @return {Promise<any>}
  */
-//TODO: supprimer cette ligne:
-//const setupCsrfProtection = async () => http.get("/auth/csrf");
-
 const setupCsrfProtection = async () => {
 	const response = await fetch("http://localhost:3001/auth/csrf", {
 		method: "GET",

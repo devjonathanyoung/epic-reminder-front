@@ -14,8 +14,6 @@ const AuthProvider = props => {
 	const { children } = props;
 
 	const [user, setUser] = useState({});
-	//const [csrfTokenLoaded, setCsrfTokenLoaded] = useState(false);
-	console.log("user in auth-context:", user);
 
 	const getUserConnected = () => {
 		getCurrentUser().then((response) => {
@@ -27,28 +25,24 @@ const AuthProvider = props => {
 
 	useEffect(getUserConnected, []);
 
-	/* const setupCSRF = async () => {
+	const setupCSRF = async () => {
 		const storedCsrfToken = csrf.getCSRFToken();
 		if(!storedCsrfToken){
 			const response = await setupCsrfProtection();
-			const csrfToken = response.headers["csrf-token"];
+			const csrfToken = response.csrfToken;
 			csrf.saveCSRFToken(csrfToken);
 		}
-	}; */
+	};
 
 	useEffect(() => {
-		const isAuthenticated = user?.role && user?.active;
-		/* if (isAuthenticated) {
-			setCsrfTokenLoaded(false);
-			setupCSRF()
-				.catch(() =>console.log("error setup csrf"))
-				.finally(() => setCsrfTokenLoaded(true));
-		} */
+		const isAuthenticated = user.id;
+		if (isAuthenticated) {
+			setupCSRF().catch((err) =>console.log("error setup csrf", err));
+		}
 	}, [user]);
 
 	return (
 		<AuthContext.Provider value={{ user }}>
-			{/* {csrfTokenLoaded && children} */}
 			{children}
 		</AuthContext.Provider>
 	);

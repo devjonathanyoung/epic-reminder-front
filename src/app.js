@@ -32,9 +32,9 @@ const App = () => {
 						<AuthProvider>
 							{/* TODO: changer url de la page d'accueil */}
 							<Route exact path="/" component={ReminderListPage}/>
-							<Route path="/reminder/create" component={FormCreateReminder}/>
-							<Route path="/reminder/update/:id" component={FormUpdateReminder}/>
-							<Route path="/reminder/:id" component={OneReminderPage}/>
+							<Route exact path="/reminder/create" component={FormCreateReminder}/>
+							<Route exact path="/reminder/update/:id" component={FormUpdateReminder}/>
+							<Route exact path="/reminder/:id" component={OneReminderPage}/>
 						</AuthProvider>
 					</Switch>
 
