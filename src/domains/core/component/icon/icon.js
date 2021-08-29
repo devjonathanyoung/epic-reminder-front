@@ -1,5 +1,5 @@
 import React from "react";
-import iconRef from "../../../../img/sprite.svg";
+import iconRef from "../../assets/img/sprite.svg";
 import "./icon.scss";
 
 const Icon = (props) => {

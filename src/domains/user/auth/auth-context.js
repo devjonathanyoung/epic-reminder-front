@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { csrf } from "../../../config";
-import { setupCsrfProtection, getCurrentUser } from "../auth/auth-services";
+import { setupCsrfProtection, getCurrentUser } from "./auth-services";
 
 const AuthContext = createContext({});
 //TODO: setup csrf quand currentUser marchera

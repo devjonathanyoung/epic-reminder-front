@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../../../img/logo_large.png";
-import user from "../../../../img/Jon_Snow.png";
+import logo from "../../assets/img/logo_large.png";
+import user from "../../assets/img/Jon_Snow.png";
 import "./top-navigation.scss";
 
 const TopNavigation = ({ children }) => {

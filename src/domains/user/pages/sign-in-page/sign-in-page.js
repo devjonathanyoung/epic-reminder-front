@@ -1,7 +1,7 @@
 import React, { useState, useEffect }  from "react";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import logo from "../../../../img/logo_large.png";
+import logo from "../../../core/assets/img/logo_large.png";
 import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
 import createUser from "../../services/create-user";
 import userLogin from "../../services/user-login";
@@ -13,7 +13,7 @@ const SignInPage = () => {
 	const [pswdNotIdentical, setPswdNotIdentical] = useState(false);
 	const [wrongPassword, setwrongPassword] = useState(false);
 	const [signUpClass, setSignUpClass ] = useState(true);
-	const history = useHistory(); 
+	const history = useHistory();
 	const { t } = useTranslation();
 
 	const handleChange = (e, fieldName) => {
@@ -95,28 +95,28 @@ const SignInPage = () => {
 				<div className="container">
 					<h1>{signUpClass ? t("user:sign.in.btn"): t("user:sign.up.btn")}</h1>
 					<form className="container__form" onSubmit={signUpClass ? handleSignIn : handleSignUp}>
-						<input 
+						<input
 							className="container__form__field"
 							placeholder="First name"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "firstName")}
 							value={form.firstName}
 							onKeyPress={handleKeyPress}
 						/>
-						{!signUpClass && <input 
+						{!signUpClass && <input
 							className="container__form__field"
 							placeholder="Last name"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "lastName")}
 							value={form.lastName}
 							onKeyPress={handleKeyPress}
 						/>}
-						<input 
+						<input
 							type="password"
 							className={`container__form__field ${wrongPassword ? "field-error": ""}`}
 							placeholder="Password"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "password")}
 							value={form.password}
 						/>
-						{!signUpClass && <input 
+						{!signUpClass && <input
 							type="password"
 							className={`container__form__field ${pswdNotIdentical ? "field-error": ""}`}
 							placeholder="Confirm Password"
@@ -135,7 +135,7 @@ const SignInPage = () => {
 				<div className={`container ${signUpClass ? "sign-up": "sign-in"}`}>
 					<h1>{signUpClass ? t("user:sign.up.container-title") : t("user:sign.in.container-title")}</h1>
 					<div className="message" >
-						{signUpClass ? t("user:sign.up.message"): 
+						{signUpClass ? t("user:sign.up.message"):
 							t("user:sign.in.message")
 						}
 					</div>
