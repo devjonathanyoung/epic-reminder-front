@@ -11,7 +11,7 @@ const SignInPage = () => {
 	const [form, setForm] = useState({ firstName: "", password:"" });
 	const [formValid, setFormValid] = useState(false);
 	const [pswdNotIdentical, setPswdNotIdentical] = useState(false);
-	const [wrongPassword, setwrongPassword] = useState(false);
+	const [wrongCredentials, setwrongCredentials] = useState(false);
 	const [signUpClass, setSignUpClass ] = useState(true);
 	const history = useHistory();
 	const { t } = useTranslation();
@@ -57,7 +57,7 @@ const SignInPage = () => {
 		userLogin(form)
 			.then((res) => {
 				if(res.error) {
-					setwrongPassword(true);
+					setwrongCredentials(true);
 				} else {
 					//TODO: changer url de la page d'accueil
 					history.push("/");
@@ -96,7 +96,7 @@ const SignInPage = () => {
 					<h1>{signUpClass ? t("user:sign.in.btn"): t("user:sign.up.btn")}</h1>
 					<form className="container__form" onSubmit={signUpClass ? handleSignIn : handleSignUp}>
 						<input
-							className="container__form__field"
+							className={`container__form__field ${wrongCredentials ? "field-error": ""}`}
 							placeholder="First name"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "firstName")}
 							value={form.firstName}
@@ -111,7 +111,7 @@ const SignInPage = () => {
 						/>}
 						<input
 							type="password"
-							className={`container__form__field ${wrongPassword ? "field-error": ""}`}
+							className={`container__form__field ${wrongCredentials ? "field-error": ""}`}
 							placeholder="Password"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "password")}
 							value={form.password}
@@ -126,7 +126,7 @@ const SignInPage = () => {
 						/>}
 						<div className="container__form__error">
 							{pswdNotIdentical && t("user:sign.password-identical")}
-							{wrongPassword && t("user:sign.password-error")}
+							{wrongCredentials && t("user:sign.credentials-error")}
 						</div>
 						<ReminderBtn type="submit" disabled={!formValid}>{t("user:sign.submit-btn")}</ReminderBtn>
 					</form>
