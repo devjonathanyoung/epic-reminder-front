@@ -1,5 +1,5 @@
 import useOneReminder from "../../services/use-one-reminder";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import deleteReminder from "../../services/delete-reminder";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import Sidebar from "../../../core/component/sidebar/sidebar";
@@ -10,8 +10,8 @@ import LinkButton from "../../component/reminder-details-btn/reminder-details-bt
 import { useTranslation } from "react-i18next";
 import "./one-reminder-page.scss";
 
-const OneReminderPage = (props) => {
-	const idReminder = props.match.params.id;
+const OneReminderPage = () => {
+	const { id: idReminder } = useParams();
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const history = useHistory(); 
 	const { t } = useTranslation();

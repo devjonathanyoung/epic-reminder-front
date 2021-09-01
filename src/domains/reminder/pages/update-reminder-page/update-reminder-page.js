@@ -1,4 +1,4 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState } from "react";
 import useOneReminder from "../../services/use-one-reminder";
 import updateReminder from "../../services/update-reminder";
@@ -10,8 +10,8 @@ import ReminderBtn from "../../component/reminder-btn/reminder-btn";
 import { useTranslation } from "react-i18next";
 import "./update-reminder-page.scss";
 
-const FormUpdateReminder = (props) => {
-	const idReminder = props.match.params.id;
+const FormUpdateReminder = () => {
+	const { id: idReminder } = useParams();
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const history = useHistory(); 
 	const { t } = useTranslation();
