@@ -1,6 +1,6 @@
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useState } from "react";
-import useOneReminder from "../../services/use-one-reminder";
+import getOneReminder from "../../services/get-one-reminder";
 import updateReminder from "../../services/update-reminder";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import Sidebar from "../../../core/component/sidebar/sidebar";
@@ -12,14 +12,15 @@ import "./update-reminder-page.scss";
 
 const FormUpdateReminder = () => {
 	const { id: idReminder } = useParams();
-	const { reminder, isLoading, isError } = useOneReminder(idReminder);
+	const [reminder, setReminder] = useState({});
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
 	const history = useHistory(); 
 	const { t } = useTranslation();
 
-	const [update, setUpdate] = useState( { ...reminder } );
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
-		setUpdate((prevReminder) => ({
+		setReminder((prevReminder) => ({
 		  ...prevReminder,
 		  [name]: value
 		}));
@@ -27,7 +28,7 @@ const FormUpdateReminder = () => {
 
 	  const handleValidation = () => {
 
-		const reminderInCreation = update;
+		const reminderInCreation = reminder;
 		const types = ["book", "movie", "game"];
 		let formIsValid = true;
 
@@ -46,7 +47,7 @@ const FormUpdateReminder = () => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (handleValidation()) {
-			updateReminder(update)
+			updateReminder(reminder)
 				.then(() => {
 					history.push("/");
 				})
@@ -56,7 +57,17 @@ const FormUpdateReminder = () => {
 		} else {
 			alert(JSON.stringify({ message: "Form submission failed: name and type cannot be empty" }, null, 4));
 		}
-	};	
+	};
+
+	useEffect(() => getOneReminder(idReminder)
+		.then((reminderToUpdate => {
+			setReminder(reminderToUpdate);
+			setIsLoading(false);
+		})).catch((err) => {
+			console.error(err);
+			setIsError(!!err);
+		}), [idReminder]
+	);
 
 	return(
 		<div className="page-wrap">
@@ -76,7 +87,7 @@ const FormUpdateReminder = () => {
 					<div className="reminder-application--entry">
 						<label htmlFor="name">{t("reminder:update.name")}</label>
 						<input
-							value={update.name}
+							value={reminder.name}
 							name="name"
 							type="text"
 							placeholder={t("reminder:update.name")}
@@ -89,7 +100,7 @@ const FormUpdateReminder = () => {
 					<div className="reminder-application--entry">
 						<label htmlFor="type">{t("reminder:update.type")}</label>
 						<select
-							value={update.type}
+							value={reminder.type}
 							name="type"
 							onChange ={handleChange}
 							required
@@ -103,7 +114,7 @@ const FormUpdateReminder = () => {
 					<div className="reminder-application--entry">
 						<label htmlFor="date">{t("reminder:update.date")}</label>
 						<input
-							value={update.date ? update.date.slice(0,10) : ""}
+							value={reminder.date ? reminder.date.slice(0,10) : ""}
 							type="date"
 							name="date"
 							onChange ={handleChange}
@@ -113,7 +124,7 @@ const FormUpdateReminder = () => {
 					<div className="reminder-application--entry reminder-application--entry-comment">
 						<label htmlFor="comment">{t("reminder:update.comment")}</label>
 						<textarea
-							value={update.comment || ""}
+							value={reminder.comment || ""}
 							type="text"
 							name="comment"
 							placeholder={t("reminder:update.comment")}
