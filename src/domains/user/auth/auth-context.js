@@ -3,10 +3,9 @@ import { useHistory } from "react-router-dom";
 import { getCurrentUser } from "./auth-services";
 
 const AuthContext = createContext({});
-//TODO: setup csrf quand currentUser marchera
 
 /**
- * Context provider for authentication + csrf protection. Retrieves current user from api
+ * Context provider for authentication. Retrieves current user from api
  * @param props
  * @return {JSX.Element}
  */

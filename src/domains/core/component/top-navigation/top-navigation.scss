@@ -13,10 +13,16 @@
       height: 3.25rem;
       margin-left: 2rem;
     }
+
+    &__user-infos {
+      text-align: center;
+      margin: 2rem 2rem 0 0;
+      color: var(--color-main-primary);
+      cursor: pointer;
+    }
     
-    &__user {
+    &__user-infos__img {
       height: 3.75rem;
       border-radius: 70%;
-      margin-right: 2rem;
     }
   };
