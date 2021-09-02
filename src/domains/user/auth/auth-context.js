@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
-import { csrf } from "../../../config";
-import { setupCsrfProtection, getCurrentUser } from "./auth-services";
+import { useHistory } from "react-router-dom";
+import { getCurrentUser } from "./auth-services";
 
 const AuthContext = createContext({});
 //TODO: setup csrf quand currentUser marchera
@@ -12,35 +12,22 @@ const AuthContext = createContext({});
  */
 const AuthProvider = props => {
 	const { children } = props;
-
+	const history = useHistory();
 	const [user, setUser] = useState({});
 	const [userAuthenticated, setUserAuthenticated] = useState(false);
 
 	const getUserConnected = () => {
-		getCurrentUser().then((response) => {
-			if(response){
-				setUser(response);
-			}
-		});
+		getCurrentUser()
+			.then((userData) => {
+				if(userData){
+					setUser(userData);
+					setUserAuthenticated(!!userData.id);
+				}
+			})
+			.catch(() => history.push("/sign-in"));
 	};
 
-	useEffect(getUserConnected, []);
-
-	/* const setupCSRF = async () => {
-		const storedCsrfToken = csrf.getCSRFToken();
-		if(!storedCsrfToken){
-			const response = await setupCsrfProtection();
-			const csrfToken = response.csrfToken;
-			csrf.saveCSRFToken(csrfToken);
-		}
-	}; */
-
-	useEffect(() => {
-		const isAuthenticated = !!user.id;
-		if (isAuthenticated) {
-			setUserAuthenticated(isAuthenticated);
-		}
-	}, [user]);
+	useEffect(getUserConnected, [history]);
 
 	return (
 		<AuthContext.Provider value={{ user, userAuthenticated }}>

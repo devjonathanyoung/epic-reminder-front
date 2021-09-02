@@ -59,7 +59,6 @@ const SignInPage = () => {
 				if(res.error) {
 					setwrongCredentials(true);
 				} else {
-					//TODO: changer url de la page d'accueil
 					history.push("/");
 				}
 			})
@@ -72,7 +71,6 @@ const SignInPage = () => {
 		e.preventDefault();
 		createUser(form)
 			.then(() => {
-				//TODO: changer url de la page d'accueil
 				history.push("/");
 			})
 			.catch((error) => {
@@ -83,6 +81,7 @@ const SignInPage = () => {
 	const toggleSignForm = () => {
 		setSignUpClass(!signUpClass);
 		setForm({ firstName: "", lastName:"", password:"", confirmedPassword: "" });
+		setwrongCredentials(false);
 	};
 
 	useEffect(formValidation, [form, formValidation]);
