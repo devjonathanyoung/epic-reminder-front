@@ -19,10 +19,29 @@
       margin: 2rem 2rem 0 0;
       color: var(--color-main-primary);
       cursor: pointer;
+      position: relative;
     }
     
     &__user-infos__img {
       height: 3.75rem;
       border-radius: 70%;
+    }
+
+    .menu-logout {
+		position: absolute;
+		top: 65px;
+		width: 100%;
+		background-color: black;
+		color: white;
+		display: none;
+		transition: all .4s ease;
+
+      &.display-menu {
+        display: block;
+		
+		&:hover {
+			background-color: var(--color-main-primary);
+		}
+      }
     }
   };
