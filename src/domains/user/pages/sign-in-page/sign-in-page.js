@@ -5,12 +5,14 @@ import logo from "../../../core/assets/img/logo_large.png";
 import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
 import createUser from "../../services/create-user";
 import userLogin from "../../services/user-login";
+import getUserByUsername from "../../services/get-user-by-username";
 import "./sign-in-page.scss";
 
 const SignInPage = () => {
-	const [form, setForm] = useState({ firstName: "", password:"" });
+	const [form, setForm] = useState({ userName: "", password:"" });
 	const [formValid, setFormValid] = useState(false);
 	const [pswdNotIdentical, setPswdNotIdentical] = useState(false);
+	const [existingUsername, setExistingUsername] = useState(false);
 	const [wrongCredentials, setwrongCredentials] = useState(false);
 	const [signUpClass, setSignUpClass ] = useState(true);
 	const history = useHistory();
@@ -34,11 +36,25 @@ const SignInPage = () => {
 		return form.password === form.confirmedPassword;
 	};
 
+	const checkUsernameExist = (newUserName) => {
+		if(!signUpClass) {
+			getUserByUsername(newUserName)
+				.then((existingUser) => {
+					if(existingUser){
+						setExistingUsername(true);
+					} else {
+						setExistingUsername(false);
+					}
+				})
+				.catch((error) => console.error(error));
+		}
+	};
+
 	const formValidation = () => {
 		if(signUpClass) {
-			setFormValid(form.firstName && form.password);
+			setFormValid(form.userName && form.password);
 		} else {
-			setFormValid(form.firstName && form.lastName && form.password && form.confirmedPassword && validateSignUpPassword());
+			setFormValid(form.userName && form.firstName && form.lastName && form.password && form.confirmedPassword && validateSignUpPassword() && !existingUsername);
 		}
 	};
 
@@ -80,9 +96,11 @@ const SignInPage = () => {
 
 	const toggleSignForm = () => {
 		setSignUpClass(!signUpClass);
-		setForm({ firstName: "", lastName:"", password:"", confirmedPassword: "" });
+		setForm({ userName: "", firstName: "", lastName:"", password:"", confirmedPassword: "" });
 		setwrongCredentials(false);
+		setExistingUsername(false);
 	};
+
 
 	useEffect(formValidation, [form, formValidation]);
 
@@ -95,12 +113,19 @@ const SignInPage = () => {
 					<h1>{signUpClass ? t("user:sign.in.btn"): t("user:sign.up.btn")}</h1>
 					<form className="container__form" onSubmit={signUpClass ? handleSignIn : handleSignUp}>
 						<input
-							className={`container__form__field ${wrongCredentials ? "field-error": ""}`}
+							className={`container__form__field ${existingUsername || wrongCredentials ? "field-error": ""}`}
+							placeholder="Username"
+							onChange={(e, fieldName) => handleChange(e, fieldName = "userName")}
+							value={form.userName}
+							onBlur={() => checkUsernameExist(form.userName)}
+						/>
+						{!signUpClass && <input
+							className="container__form__field"
 							placeholder="First name"
 							onChange={(e, fieldName) => handleChange(e, fieldName = "firstName")}
 							value={form.firstName}
 							onKeyPress={handleKeyPress}
-						/>
+						/>}
 						{!signUpClass && <input
 							className="container__form__field"
 							placeholder="Last name"
@@ -126,6 +151,7 @@ const SignInPage = () => {
 						<div className="container__form__error">
 							{pswdNotIdentical && t("user:sign.password-identical")}
 							{wrongCredentials && t("user:sign.credentials-error")}
+							{existingUsername && t("user:sign.username-error")}
 						</div>
 						<ReminderBtn type="submit" disabled={!formValid}>{t("user:sign.submit-btn")}</ReminderBtn>
 					</form>
