@@ -27,18 +27,16 @@ const FormUpdateReminder = () => {
 	  };
 
 	  const handleValidation = () => {
-
-		const reminderInCreation = reminder;
 		const types = ["book", "movie", "game"];
 		let formIsValid = true;
 
 		//name
-		if (reminderInCreation.name === undefined || reminderInCreation.name.trim().length === 0) { 
+		if (!reminder.name || reminder.name.trim().length === 0) { 
 			formIsValid = false;
 		}
 
 		//type
-		if (reminderInCreation.type === undefined || !types.includes(reminderInCreation.type) ) {
+		if (!reminder.type || !types.includes(reminder.type) ) {
 			formIsValid = false;
 		}
 		return formIsValid;
@@ -54,8 +52,6 @@ const FormUpdateReminder = () => {
 				.catch((error) => {
 					console.error(error);
 				});
-		} else {
-			alert(JSON.stringify({ message: "Form submission failed: name and type cannot be empty" }, null, 4));
 		}
 	};
 

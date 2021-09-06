@@ -22,6 +22,8 @@ const App = () => {
 		return (
 			<Route key={path} exact path={path}>
 				<AuthProvider>
+					{/*TODO: mettre le AuthProvider à la racine sinon il va recréer pour chaque composant un Provider .
+					Créer un composant ProtectedRoute qui lui va rediriger vers page d'accueil : history.push("/") */}
 					<Component />
 				</AuthProvider>
 			</Route>

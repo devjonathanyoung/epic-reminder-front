@@ -1,5 +1,6 @@
 import React, { useContext, useState, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import logo from "../../assets/img/logo_large.png";
 import userImg from "../../assets/img/Jon_Snow.png";
 import { AuthContext } from "../../../user/auth/auth-context.js";
@@ -11,6 +12,7 @@ import "./top-navigation.scss";
 const TopNavigation = ({ children }) => {
 	const { user } = useContext(AuthContext);
 	const history = useHistory();
+	const { t } = useTranslation();
 
 	const menuRef = useRef();
 	const [ showMenu, setShowMenu ] = useState(false);
@@ -23,7 +25,7 @@ const TopNavigation = ({ children }) => {
 	};
 	
 	const toggleMenu = () => setShowMenu(!showMenu);
-
+	
 	return (
 		<header className="top-navigation">
 			<Link to={"/"}>
@@ -32,12 +34,12 @@ const TopNavigation = ({ children }) => {
 			{ children }
 			<div onClick={toggleMenu} className="top-navigation__user-infos" ref={menuRef}>
 				<img src={userImg} alt="user-profile" className="top-navigation__user-infos__img"/>
-				<div className="top-navigation__user-infos__img">{`Welcome ${user.firstname}`}</div>
+				<div className="top-navigation__user-infos__img">{`${t("core:top-navigation.welcome")} ${user.firstname}`}</div>
 				<ReminderBtn 
 					className={`menu-logout ${showMenu ? "display-menu" : ""}`}
 				 	onClick={handleLogout}
 				>
-					Logout
+					{t("core:top-navigation.logout")}
 				</ReminderBtn>
 			</div>
 		</header>

@@ -13,14 +13,12 @@ const AuthProvider = props => {
 	const { children } = props;
 	const history = useHistory();
 	const [user, setUser] = useState({});
-	const [userAuthenticated, setUserAuthenticated] = useState(false);
 
 	const getUserConnected = () => {
 		getCurrentUser()
 			.then((userData) => {
 				if(userData){
 					setUser(userData);
-					setUserAuthenticated(!!userData.id);
 				}
 			})
 			.catch(() => history.push("/sign-in"));
@@ -29,7 +27,7 @@ const AuthProvider = props => {
 	useEffect(getUserConnected, [history]);
 
 	return (
-		<AuthContext.Provider value={{ user, userAuthenticated }}>
+		<AuthContext.Provider value={{ user }}>
 			{children}
 		</AuthContext.Provider>
 	);

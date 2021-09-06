@@ -15,12 +15,13 @@ const SignInPage = () => {
 	const [existingUsername, setExistingUsername] = useState(false);
 	const [wrongCredentials, setwrongCredentials] = useState(false);
 	const [signUpClass, setSignUpClass ] = useState(true);
+	const [networkError, setNetworkError] = useState(false);
 	const history = useHistory();
 	const { t } = useTranslation();
 
-	const handleChange = (e, fieldName) => {
+	const handleChange = (e) => {
 		const newValue = e.target.value;
-		setForm({ ...form, [fieldName]: newValue });
+		setForm({ ...form, [e.target.name]: newValue });
 	};
 
 	const alphabeticRegexAndDash = /[a-zA-Z\-']+$/i;
@@ -39,14 +40,12 @@ const SignInPage = () => {
 	const checkUsernameExist = (newUserName) => {
 		if(!signUpClass) {
 			getUserByUsername(newUserName)
-				.then((existingUser) => {
-					if(existingUser){
-						setExistingUsername(true);
-					} else {
-						setExistingUsername(false);
-					}
-				})
-				.catch((error) => console.error(error));
+				.then((existingUser) => setExistingUsername(!!existingUser))
+				.catch((error) => {
+					// TODO: à afficher dans le toaster
+					setNetworkError(!error);
+					console.error(error);
+				});
 		}
 	};
 
@@ -103,7 +102,7 @@ const SignInPage = () => {
 
 
 	useEffect(formValidation, [form, formValidation]);
-
+	console.log("form", form);
 	return (
 		<div className="sign-in-page">
 			<img src={logo} alt="reminder poster" className="sign-in-page__logo"/>
@@ -114,37 +113,42 @@ const SignInPage = () => {
 					<form className="container__form" onSubmit={signUpClass ? handleSignIn : handleSignUp}>
 						<input
 							className={`container__form__field ${existingUsername || wrongCredentials ? "field-error": ""}`}
-							placeholder="Username"
-							onChange={(e, fieldName) => handleChange(e, fieldName = "userName")}
+							placeholder={t("user:sign.fields.username")}
+							name="userName"
+							onChange={handleChange}
 							value={form.userName}
 							onBlur={() => checkUsernameExist(form.userName)}
 						/>
 						{!signUpClass && <input
 							className="container__form__field"
-							placeholder="First name"
-							onChange={(e, fieldName) => handleChange(e, fieldName = "firstName")}
+							placeholder={t("user:sign.fields.firstname")}
+							name="firstName"
+							onChange={handleChange}
 							value={form.firstName}
 							onKeyPress={handleKeyPress}
 						/>}
 						{!signUpClass && <input
 							className="container__form__field"
-							placeholder="Last name"
-							onChange={(e, fieldName) => handleChange(e, fieldName = "lastName")}
+							placeholder={t("user:sign.fields.lastname")}
+							name="lastName"
+							onChange={handleChange}
 							value={form.lastName}
 							onKeyPress={handleKeyPress}
 						/>}
 						<input
 							type="password"
 							className={`container__form__field ${wrongCredentials ? "field-error": ""}`}
-							placeholder="Password"
-							onChange={(e, fieldName) => handleChange(e, fieldName = "password")}
+							placeholder={t("user:sign.fields.password")}
+							name="password"
+							onChange={handleChange}
 							value={form.password}
 						/>
 						{!signUpClass && <input
 							type="password"
 							className={`container__form__field ${pswdNotIdentical ? "field-error": ""}`}
-							placeholder="Confirm Password"
-							onChange={(e, fieldName) => handleChange(e, fieldName = "confirmedPassword")}
+							placeholder={t("user:sign.fields.confirm-password")}
+							name="confirmedPassword"
+							onChange={handleChange}
 							value={form.confirmedPassword}
 							onBlur={handleBlur}
 						/>}
