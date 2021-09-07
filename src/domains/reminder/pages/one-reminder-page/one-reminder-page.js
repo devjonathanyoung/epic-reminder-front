@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import getOneReminder from "../../services/get-one-reminder";
+import React from "react";
 import { useHistory, useParams } from "react-router-dom";
+import useOneReminder from "../../custom-hooks/use-one-reminder";
 import deleteReminder from "../../services/delete-reminder";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import Sidebar from "../../../core/component/sidebar/sidebar";
@@ -13,10 +13,7 @@ import "./one-reminder-page.scss";
 
 const OneReminderPage = () => {
 	const { id: idReminder } = useParams();
-	const [reminder, setReminder] = useState({});
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
-
+	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const history = useHistory(); 
 	const { t } = useTranslation();
 
@@ -33,16 +30,6 @@ const OneReminderPage = () => {
 	const handleFormatDate = (date) => {
 		return (date?.slice(0,10) ?? "");
 	};
-
-	useEffect(() => getOneReminder(idReminder)
-		.then((reminderData => {
-			setReminder(reminderData);
-			setIsLoading(false);
-		})).catch((err) => {
-			console.error(err);
-			setIsError(!!err);
-		}), [idReminder]
-	);
 
 	return(
 		<div className="page-wrap">

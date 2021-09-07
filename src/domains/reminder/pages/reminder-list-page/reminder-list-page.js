@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import getReminderList from "../../services/get-reminder-list";
+import React, { useState } from "react";
 import { ReminderCard } from "../../index";
 import ReminderWrapper from "../../component/reminder-wrapper/reminder-wrapper";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
@@ -9,12 +8,11 @@ import ReminderContent from "../../component/reminder-content/reminder-content";
 import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
 import AnimatedBtn from "../../../core/component/sidebar-btn/sidebar-animated-btn";
 import FilterType from "../../../core/component/filter-type/filter-type";
+import useReminderList from "../../custom-hooks/use-reminder-list";
 
 const ReminderListPage = () => {
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
-	const [remindersList, setRemindersList] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
+	const { remindersList, isLoading, isError } = useReminderList(filter);
 
 	const setSearch = (newSearch) => {
 		setFilter( (oldState) => ({ 
@@ -49,19 +47,6 @@ const ReminderListPage = () => {
 			return `No reminder of type ${filter.type} yet.`;
 		};
 	};
-
-	const initList = () => {
-		getReminderList(filter)
-			.then((reminders) => {
-				setRemindersList(reminders);
-				setIsLoading(false);
-			}).catch((err) => {
-				console.error(err);
-				setIsError(!!err);
-			});
-	};
-
-	useEffect(initList, [filter]);
 	
 	return(
 		<ReminderWrapper>

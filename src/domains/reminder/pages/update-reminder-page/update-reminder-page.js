@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory, useParams } from "react-router-dom";
-import getOneReminder from "../../services/get-one-reminder";
+import { useTranslation } from "react-i18next";
+import useOneReminder from "../../custom-hooks/use-one-reminder";
 import updateReminder from "../../services/update-reminder";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import Sidebar from "../../../core/component/sidebar/sidebar";
 import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
 import Breadcrumb from "../../../core/component/breadcrumb/breadcrumb";
 import ReminderBtn from "../../component/reminder-btn/reminder-btn";
-import { useTranslation } from "react-i18next";
 import "./update-reminder-page.scss";
 
 const FormUpdateReminder = () => {
 	const { id: idReminder } = useParams();
-	const [reminder, setReminder] = useState({});
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
 	const history = useHistory(); 
 	const { t } = useTranslation();
+	const { reminder, setReminder, isLoading, isError } = useOneReminder(idReminder);
 
 	const handleChange = ({ target }) => {
 		const { name, value } = target;
@@ -54,16 +52,6 @@ const FormUpdateReminder = () => {
 				});
 		}
 	};
-
-	useEffect(() => getOneReminder(idReminder)
-		.then((reminderToUpdate => {
-			setReminder(reminderToUpdate);
-			setIsLoading(false);
-		})).catch((err) => {
-			console.error(err);
-			setIsError(!!err);
-		}), [idReminder]
-	);
 
 	return(
 		<div className="page-wrap">
