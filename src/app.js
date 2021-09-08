@@ -8,36 +8,33 @@ import {
 	FormUpdateReminder
 } from "./domains/reminder";
 import { SignInPage, AuthProvider } from "./domains/user";
+import ProtectedRoute from "./domains/user/auth/protected-route";
 
 const App = () => {
 	const protectedRoutesList = [
 		{ path: "/reminder/create", component: FormCreateReminder },
-		{ path: "/reminder/update/:id", component: FormUpdateReminder },
 		{ path: "/reminder/:id", component: OneReminderPage },
+		{ path: "/reminder/update/:id", component: FormUpdateReminder },
 		{ path: "/", component: ReminderListPage }
 	];
 
 	const renderProtectedRoutes = (route) => {
 		const { component: Component, path } = route;
 		return (
-			<Route key={path} exact path={path}>
-				<AuthProvider>
-					{/*TODO: mettre le AuthProvider à la racine sinon il va recréer pour chaque composant un Provider .
-					Créer un composant ProtectedRoute qui lui va rediriger vers page d'accueil : history.push("/") */}
-					<Component />
-				</AuthProvider>
-			</Route>
+			<ProtectedRoute key={path} exact path={path} Component={Component}></ProtectedRoute>
 		);
 	};
 
 	return (
 		<Router>
-			<div>
-				<Switch>
-					<Route exact path="/sign-in" component={SignInPage}/>
-					{protectedRoutesList.map(renderProtectedRoutes)}
-				</Switch>
-			</div>
+			<AuthProvider>
+				<div>	
+					<Switch>
+						<Route exact path="/sign-in" component={SignInPage}/>
+						{protectedRoutesList.map(renderProtectedRoutes)}
+					</Switch>
+				</div>	
+			</AuthProvider>
 		</Router>
 	);
 };

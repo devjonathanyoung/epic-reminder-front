@@ -73,8 +73,6 @@ const SignInPage = () => {
 			.then((res) => {
 				if(res.error) {
 					setwrongCredentials(true);
-				} else {
-					history.push("/");
 				}
 			})
 			.catch((error) => {
@@ -102,7 +100,7 @@ const SignInPage = () => {
 
 
 	useEffect(formValidation, [form, formValidation]);
-	console.log("form", form);
+
 	return (
 		<div className="sign-in-page">
 			<img src={logo} alt="reminder poster" className="sign-in-page__logo"/>

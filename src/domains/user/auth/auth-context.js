@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { getCurrentUser } from "./auth-services";
 
 const AuthContext = createContext({});
@@ -11,24 +10,32 @@ const AuthContext = createContext({});
  */
 const AuthProvider = props => {
 	const { children } = props;
-	const history = useHistory();
-	const [user, setUser] = useState({});
+	const [user, setUser] = useState();
+	const [loading, setLoading] = useState(true);
 
 	const getUserConnected = () => {
 		getCurrentUser()
 			.then((userData) => {
+				console.log("userData", userData);
 				if(userData){
 					setUser(userData);
 				}
 			})
-			.catch(() => history.push("/sign-in"));
+			.finally(() => {
+				console.log("rentre finally");
+				setLoading(false);
+			});
 	};
 
-	useEffect(getUserConnected, [history]);
+	useEffect(() => {
+		console.log("user dans useContext", user);
+	}, [user]);
+
+	useEffect(getUserConnected, []);
 
 	return (
 		<AuthContext.Provider value={{ user }}>
-			{children}
+			{loading ? children : null}
 		</AuthContext.Provider>
 	);
 };
