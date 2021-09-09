@@ -7,12 +7,15 @@ import { AuthContext } from "../../../user/auth/auth-context.js";
 import { logout } from "../../../user/auth/auth-services.js";
 import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
 import useOnClickOutside from "../custom-hooks/use-on-click-outside.js";
+import useModal from "../custom-hooks/use-modal.js";
+import Toast from "../toast/toast";
 import "./top-navigation.scss";
 
 const TopNavigation = ({ children }) => {
 	const { user } = useContext(AuthContext);
 	const history = useHistory();
 	const { t } = useTranslation();
+	const { ModalWrapper, open, close } = useModal();
 
 	const menuRef = useRef();
 	const [ showMenu, setShowMenu ] = useState(false);
@@ -28,6 +31,10 @@ const TopNavigation = ({ children }) => {
 	
 	return (
 		<header className="top-navigation">
+			<ModalWrapper>
+				<Toast success autoDelete autoDeleteTime={3000} close={close}/>
+			</ModalWrapper>
+			<button onClick={open}>Open modal</button>
 			<Link to={"/"}>
 				<img src={logo} alt="reminder poster" className="top-navigation__logo"/>
 			</Link>

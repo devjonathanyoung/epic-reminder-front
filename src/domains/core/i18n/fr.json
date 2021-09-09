@@ -2,5 +2,15 @@
     "top-navigation": {
         "welcome": "Bienvenue",
         "logout": "Déconnexion"
+    },
+    "toast": {
+        "title": {
+            "success": "Ok !",
+            "fail": "Oh oh.."
+        },
+        "message": {
+            "success": "Ça a marché ;)",
+            "fail": "Petit problème. Ré-essaie"
+        }
     }
 }
