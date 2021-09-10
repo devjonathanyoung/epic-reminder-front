@@ -50,8 +50,6 @@ const FormCreateReminder = () => {
 				.catch((error) => {
 					console.error(error);
 				});
-		} else {
-			alert(JSON.stringify({ message: "Form submission failed: name and type cannot be empty" }, null, 4));
 		}
 	};
 

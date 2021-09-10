@@ -24,7 +24,7 @@ const TopNavigation = ({ children }) => {
 	const handleLogout = () => {
 		logout()
 			.then(() => history.push("/sign-in"))
-			.catch(() => history.push("/"));
+			.catch(() => open());
 	};
 	
 	const toggleMenu = () => setShowMenu(!showMenu);
@@ -32,9 +32,8 @@ const TopNavigation = ({ children }) => {
 	return (
 		<header className="top-navigation">
 			<ModalWrapper>
-				<Toast success autoDelete autoDeleteTime={3000} close={close}/>
+				<Toast autoDelete autoDeleteTime={5000} close={close}/>
 			</ModalWrapper>
-			<button onClick={open}>Open modal</button>
 			<Link to={"/"}>
 				<img src={logo} alt="reminder poster" className="top-navigation__logo"/>
 			</Link>

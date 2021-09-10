@@ -19,7 +19,7 @@ const Toast = (props) => {
 		return () => {
 			clearInterval(interval);
 		};
-	}, []);
+	}, [autoDelete, autoDeleteTime, close]);
 
 	return (
 		<div className={`toast ${success ? "success" : ""}`}>

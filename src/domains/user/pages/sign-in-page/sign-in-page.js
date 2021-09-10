@@ -6,6 +6,8 @@ import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
 import createUser from "../../services/create-user";
 import userLogin from "../../services/user-login";
 import getUserByUsername from "../../services/get-user-by-username";
+import useModal from "../../../core/component/custom-hooks/use-modal.js";
+import Toast from "../../../core/component/toast/toast";
 import "./sign-in-page.scss";
 
 const SignInPage = () => {
@@ -15,7 +17,7 @@ const SignInPage = () => {
 	const [existingUsername, setExistingUsername] = useState(false);
 	const [wrongCredentials, setwrongCredentials] = useState(false);
 	const [signUpClass, setSignUpClass ] = useState(true);
-	const [networkError, setNetworkError] = useState(false);
+	const { ModalWrapper, open, close } = useModal();
 	const history = useHistory();
 	const { t } = useTranslation();
 
@@ -42,8 +44,7 @@ const SignInPage = () => {
 			getUserByUsername(newUserName)
 				.then((existingUser) => setExistingUsername(!!existingUser))
 				.catch((error) => {
-					// TODO: à afficher dans le toaster
-					setNetworkError(!error);
+					open();
 					console.error(error);
 				});
 		}
@@ -105,6 +106,9 @@ const SignInPage = () => {
 
 	return (
 		<div className="sign-in-page">
+			<ModalWrapper>
+				<Toast autoDelete autoDeleteTime={5000} close={close}/>
+			</ModalWrapper>
 			<img src={logo} alt="reminder poster" className="sign-in-page__logo"/>
 			<div className="sign-main-container">
 
