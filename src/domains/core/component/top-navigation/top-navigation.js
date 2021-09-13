@@ -27,8 +27,6 @@ const TopNavigation = ({ children }) => {
 			.catch(() => open());
 	};
 	
-	const toggleMenu = () => setShowMenu(!showMenu);
-	
 	return (
 		<header className="top-navigation">
 			<ModalWrapper>
@@ -38,7 +36,7 @@ const TopNavigation = ({ children }) => {
 				<img src={logo} alt="reminder poster" className="top-navigation__logo"/>
 			</Link>
 			{ children }
-			<div onClick={toggleMenu} className="top-navigation__user-infos" ref={menuRef}>
+			<div onClick={() => setShowMenu(prevShow => !prevShow)} className="top-navigation__user-infos" ref={menuRef}>
 				<img src={userImg} alt="user-profile" className="top-navigation__user-infos__img"/>
 				<div className="top-navigation__user-infos__img">{`${t("core:top-navigation.welcome")} ${user.firstname}`}</div>
 				<ReminderBtn 
