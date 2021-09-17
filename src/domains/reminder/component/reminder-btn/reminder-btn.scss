@@ -2,20 +2,34 @@
     background-color: #eee;
     color: var(--color-main-primary);
     border: none;
-    width: 10rem;
     cursor: pointer;
-    padding: 1rem 2rem;
+    padding: 10px 20px;
     border-radius: .4rem;
     text-decoration: none;
     color: var(--color-main-primary);
-  
+
       &:hover {
           background-color: var(--color-main-primary);
           color: #eee;
           transition: all .4s;
-        }
-        
+      }
       &:active {
         transform: translateY(-.5rem);
       }
-  };
+
+      &:disabled {
+        background-color: var(--color-grey-light-3);
+        color: #eee;
+      }
+};
+    
+.dark {
+  color: #eee;
+  background-color: var(--color-main-dark);
+
+  &:hover {
+    background-color: #eee;
+    color: var(--color-main-dark);
+    transition: all .4s;
+  }
+}        

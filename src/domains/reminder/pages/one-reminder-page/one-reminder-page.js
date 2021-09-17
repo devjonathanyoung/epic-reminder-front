@@ -1,5 +1,6 @@
-import useOneReminder from "../../services/use-one-reminder";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { useHistory, useParams } from "react-router-dom";
+import useOneReminder from "../../custom-hooks/use-one-reminder";
 import deleteReminder from "../../services/delete-reminder";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
 import Sidebar from "../../../core/component/sidebar/sidebar";
@@ -10,8 +11,8 @@ import LinkButton from "../../component/reminder-details-btn/reminder-details-bt
 import { useTranslation } from "react-i18next";
 import "./one-reminder-page.scss";
 
-const OneReminderPage = (props) => {
-	const idReminder = props.match.params.id;
+const OneReminderPage = () => {
+	const { id: idReminder } = useParams();
 	const { reminder, isLoading, isError } = useOneReminder(idReminder);
 	const history = useHistory(); 
 	const { t } = useTranslation();
@@ -47,7 +48,7 @@ const OneReminderPage = (props) => {
 					<div>{t("reminder:one.date")}: {handleFormatDate(reminder.date)} </div>
 					<p>{t("reminder:one.comment")}: {reminder.comment}</p>
 					<LinkButton className="reminder-btn" to={`/reminder/update/${ idReminder }`}>{t("reminder:one.update")}</LinkButton>
-					<ReminderBtn className="reminder-btn" handleDeleteClick={() => handleDelete(idReminder)}>{t("reminder:one.delete")}</ReminderBtn>
+					<ReminderBtn className="reminder-btn" onClick={() => handleDelete(idReminder)}>{t("reminder:one.delete")}</ReminderBtn>
 				</section>
 			</div>}
 		</div>

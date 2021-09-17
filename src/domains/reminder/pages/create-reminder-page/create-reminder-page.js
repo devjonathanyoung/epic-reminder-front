@@ -9,9 +9,9 @@ import ReminderBtn from "../../component/reminder-btn/reminder-btn";
 import { useTranslation } from "react-i18next";
 import "../update-reminder-page/update-reminder-page.scss";
 
-const FormCreateReminder = (props) => {
+const FormCreateReminder = () => {
 	const [reminder, setReminder] = useState({});
-	const history = useHistory(); 
+	const history = useHistory();
 	const { t } = useTranslation();
 
 	const handleChange = ({ target }) => {
@@ -29,7 +29,7 @@ const FormCreateReminder = (props) => {
 		let formIsValid = true;
 
 		//name
-		if (reminderInCreation.name === undefined || reminderInCreation.name.trim().length === 0) { 
+		if (reminderInCreation.name === undefined || reminderInCreation.name.trim().length === 0) {
 			formIsValid = false;
 		}
 
@@ -50,10 +50,8 @@ const FormCreateReminder = (props) => {
 				.catch((error) => {
 					console.error(error);
 				});
-		} else {
-			alert(JSON.stringify({ message: "Form submission failed: name and type cannot be empty" }, null, 4));
 		}
-	};			
+	};
 
 	return(
 		<div className="page-wrap">
@@ -65,13 +63,13 @@ const FormCreateReminder = (props) => {
 
 			<div>
 				<Breadcrumb to="/" path={t("reminder:create.home")} page={t("reminder:create.title")} />
-				
+
 				{/* <h1>Add a new reminder</h1> */}
 				<h1>{t("reminder:create.title")}</h1>
 
 
 				<form className="reminder-application" onSubmit={handleSubmit}>
-				
+
 					<div className="reminder-application--entry">
 						<label htmlFor="name">{t("reminder:create.name")}</label>
 						<input

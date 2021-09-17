@@ -32,7 +32,7 @@ const ReminderCard = (props) => {
 					<Icon name="new-message" className="reminderCard__action--icon" />
 				</Link>
 				
-				<Icon handleDeleteClick={() => handleDelete(props.id)} name="trash" className="reminderCard__action--icon" />
+				<Icon onClick={() => handleDelete(props.id)} name="trash" className="reminderCard__action--icon" />
 			</div>
 		</div>
 	);

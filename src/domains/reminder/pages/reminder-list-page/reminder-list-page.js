@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import useReminderList from "../../services/use-reminder-list";
 import { ReminderCard } from "../../index";
 import ReminderWrapper from "../../component/reminder-wrapper/reminder-wrapper";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
@@ -9,11 +8,12 @@ import ReminderContent from "../../component/reminder-content/reminder-content";
 import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
 import AnimatedBtn from "../../../core/component/sidebar-btn/sidebar-animated-btn";
 import FilterType from "../../../core/component/filter-type/filter-type";
+import useReminderList from "../../custom-hooks/use-reminder-list";
 
 const ReminderListPage = () => {
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
-	const { reminders, isLoading, isError } = useReminderList(filter);
-	
+	const { remindersList, isLoading, isError } = useReminderList(filter);
+
 	const setSearch = (newSearch) => {
 		setFilter( (oldState) => ({ 
 			...oldState, search: newSearch 
@@ -61,7 +61,7 @@ const ReminderListPage = () => {
 			</Sidebar>
 			
 			<ReminderContent>
-				{!isLoading && !isError && reminders.length ? ( reminders.map((reminder) => {
+				{!isLoading && !isError && remindersList.length ? ( remindersList.map((reminder) => {
 					return (
 						<ReminderCard key={reminder.id} {...reminder}/>
 					);
