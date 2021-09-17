@@ -59,6 +59,7 @@ const SignUpForm = (props) => {
 			})
 			.catch((error) => {
 				console.error(error);
+				open();
 			});
 	};
 

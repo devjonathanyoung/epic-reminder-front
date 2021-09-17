@@ -2,16 +2,15 @@ import React, { useState }  from "react";
 import { useTranslation } from "react-i18next";
 import logo from "../../../core/assets/img/logo_large.png";
 import ReminderBtn from "../../../reminder/component/reminder-btn/reminder-btn";
-import useModal from "../../../core/component/custom-hooks/use-modal.js";
-import Toast from "../../../core/component/toast/toast";
-import "./sign-in-page.scss";
+import useToast from "../../../core/component/custom-hooks/use-toast/use-toast";
 import SignInForm from "../../component/sign-in-form";
 import SignUpForm from "../../component/sign-up-form";
+import "./sign-in-page.scss";
 
 const SignInPage = () => {
 	const [form, setForm] = useState({ userName: "", password:"" });
 	const [signUpMode, setSignUpClass ] = useState(true);
-	const { ModalWrapper, open, close } = useModal();
+	const { Toast, open, close } = useToast();
 	const { t } = useTranslation();
 
 	const handleChange = (e) => {
@@ -26,9 +25,7 @@ const SignInPage = () => {
 
 	return (
 		<div className="sign-in-page">
-			<ModalWrapper>
-				<Toast autoDelete autoDeleteTime={5000} close={close}/>
-			</ModalWrapper>
+			<Toast close={close}/>
 			<img src={logo} alt="reminder poster" className="sign-in-page__logo"/>
 			<div className="sign-main-container">
 
@@ -39,13 +36,12 @@ const SignInPage = () => {
 					<SignInForm
 						handleChange={handleChange}
 						form={form}
-						setForm={setForm}
+						open={open}
 					/>}
 					{!signUpMode && 
 					<SignUpForm
 						handleChange={handleChange}
 						form={form}
-						setForm={setForm}
 						open={open}
 					/>}
 				</div>

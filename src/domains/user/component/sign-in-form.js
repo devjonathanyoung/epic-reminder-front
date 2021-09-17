@@ -5,7 +5,7 @@ import ReminderBtn from "../../reminder/component/reminder-btn/reminder-btn";
 import userLogin from "../services/user-login";
 
 const SignInForm = (props) => {
-	const { handleChange, form } = props;
+	const { handleChange, form, open } = props;
 	const { t } = useTranslation();
 	const history = useHistory();
 	const [formValid, setFormValid] = useState(false);
@@ -22,6 +22,7 @@ const SignInForm = (props) => {
 				}
 			})
 			.catch((error) => {
+				open();
 				console.error(error);
 			});
 	};
