@@ -64,7 +64,6 @@ const FormCreateReminder = () => {
 			<div>
 				<Breadcrumb to="/" path={t("reminder:create.home")} page={t("reminder:create.title")} />
 
-				{/* <h1>Add a new reminder</h1> */}
 				<h1>{t("reminder:create.title")}</h1>
 
 
@@ -91,9 +90,9 @@ const FormCreateReminder = () => {
 							required
 						>
 							<option value="">{t("reminder:create.select")}</option>
-							<option value="book">{t("reminder:create.book")}</option>
-							<option value="game">{t("reminder:create.game")}</option>
-							<option value="movie">{t("reminder:create.movie")}</option>
+							<option value="book">{t("reminder:type.book")}</option>
+							<option value="game">{t("reminder:type.game")}</option>
+							<option value="movie">{t("reminder:type.movie")}</option>
 						</select>
 					</div>
 

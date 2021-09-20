@@ -2,8 +2,14 @@
     "main-page" : {
         "title": "Ma liste de Reminders"
     },
+    "type": {
+        "book": "Livre",
+        "game": "Jeu",
+        "movie": "Film",
+        "all": "Toutes catégories"
+    },
     "card": {
-        "name": "Titre : ",
+        "name": "Titre: ",
         "type": "Genre: ",
         "release-date": "Date de sortie: ",
         "comment": "Commentaire: "
@@ -11,13 +17,10 @@
     "create": {
         "back": "Retour à la liste",
         "home": "Accueil >",
-        "title": "Ajouter un nouveau rappel",
+        "title": "Créer un nouveau rappel",
         "name": "Titre",
         "type": "Genre",
         "select": "Sélectionnez un genre",
-        "book": "Livre",
-        "game": "Jeu",
-        "movie": "Film",
         "date": "Date",
         "comment": "Commentaire",
         "create": "Créer"
@@ -38,9 +41,6 @@
         "title": "Modifier le rappel",
         "name": "Titre",
         "type": "Genre",
-        "book": "Livre",
-        "game": "Jeu",
-        "movie": "Film",
         "date": "Date",
         "comment": "Commentaire",
         "update": "Modifier"

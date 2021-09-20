@@ -89,9 +89,9 @@ const FormUpdateReminder = () => {
 							onChange ={handleChange}
 							required
 						>
-							<option value="book">{t("reminder:update.book")}</option>
-							<option value="game">{t("reminder:update.game")}</option>
-							<option value="movie">{t("reminder:update.movie")}</option>
+							<option value="book">{t("reminder:type.book")}</option>
+							<option value="game">{t("reminder:type.game")}</option>
+							<option value="movie">{t("reminder:type.movie")}</option>
 						</select>
 					</div>
 

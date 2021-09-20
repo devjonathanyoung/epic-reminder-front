@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
+
 import { ReminderCard } from "../../index";
 import ReminderWrapper from "../../component/reminder-wrapper/reminder-wrapper";
 import TopNavigation from "../../../core/component/top-navigation/top-navigation";
@@ -13,6 +15,7 @@ import useReminderList from "../../custom-hooks/use-reminder-list";
 const ReminderListPage = () => {
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
 	const { remindersList, isLoading, isError } = useReminderList(filter);
+	const { t } = useTranslation();
 
 	const setSearch = (newSearch) => {
 		setFilter( (oldState) => ({ 
@@ -55,7 +58,7 @@ const ReminderListPage = () => {
 			</TopNavigation>
 
 			<Sidebar>
-				<ActiveBtn to="/reminder/create" value="Add a new reminder" />
+				<ActiveBtn to="/reminder/create" value={t("reminder:create.title")} />
 				<AnimatedBtn handleSortName={() => handleSort("name")} handleSortDate={() => handleSort("date")} />
 				<FilterType handleType={handleType} />
 			</Sidebar>

@@ -22,7 +22,7 @@ const ReminderCard = (props) => {
 			<Link className="reminderCard__info" to={`/reminder/${ props.id }`}>
 				<img src="https://via.placeholder.com/100x100?text=image" alt="reminder poster"/>
 				<h2>{props.name}</h2>
-				<span>{t("reminder:card.type")} {props.type}</span>
+				<span>{t("reminder:card.type")} {t(`reminder:type.${props.type}`)}</span>
 				<span>{t("reminder:card.release-date")} {handleFormatDate(props.date)}</span>
 				<span>{t("reminder:card.comment")} {props.comment}</span>
 			</Link>
