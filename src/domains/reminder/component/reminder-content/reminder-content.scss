@@ -1,5 +1,9 @@
 .main-content { 
-    grid-area: main-content;
     display: grid;
+    grid-area: main-content;
     grid-template-columns: repeat(3, minmax(25rem, 1fr));
+    column-gap: 20px;
+    row-gap: 20px;
+    padding: 20px;
+    padding: 20px;
   };

@@ -1,8 +1,7 @@
-.reminderCard {
+.reminder-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 2rem;
     border-radius: .8rem;
     background-color: #ffff;
     box-shadow: 0 1rem 2rem rgba(#000, 0.25);
@@ -14,31 +13,42 @@
       }
 
     &__info {
-        text-decoration: none;
-        color: inherit;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        gap: 15px;
         font-size: 1.3rem;
-        line-height: 2.5;
+        text-decoration: none;
+        color: inherit;
+        padding: 15px;
+    }
 
-            :nth-child(n+2) {
-                padding: .5rem 2rem;
-            }
+    &__info__title {
+        display: flex;
+        align-items: center;
 
-            span {
-                display: flex;
-                flex-direction:column;
+        .fav-icon {
+            margin-left: auto;
+
+            &:hover {
+                fill: white;
             }
+            
+            &.fav-selected {
+                fill: var(--color-main-primary);
+
+                &:hover {
+                    fill: var(--color-main-dark);
+                }
+            }
+        }
     }
 
     &__action {
         display: flex;
-        margin: .5rem 0 1rem 0;
+        padding: 15px;
 
-        &--icon {
-            fill: var(--color-main-dark);
-            margin: 0 .5rem 0 2rem;
+        &--icon:not(:first-child) {
+            margin-left: 10px; 
         }
     }
 };

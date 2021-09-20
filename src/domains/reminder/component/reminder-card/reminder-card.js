@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import deleteReminder from "../../services/delete-reminder";
 import { useTranslation } from "react-i18next";
@@ -6,6 +7,7 @@ import Icon from "../../../core/component/icon/icon";
 
 const ReminderCard = (props) => {
 	const { t } = useTranslation();
+	const [fav, setFav ] = useState(false);
 
 	const handleDelete = (id) => {
 		deleteReminder(id).then(response => console.log(response));
@@ -15,24 +17,32 @@ const ReminderCard = (props) => {
 		return (date?.slice(0,10) ?? "");
 	};
 
+	const handleFav = (e) => {
+		e.preventDefault();
+		setFav(prevState => !prevState);
+	};
+
 	return(
 
-		<div className="reminderCard" key={props.id}>
+		<div className="reminder-card" key={props.id} to={`/reminder/${ props.id }`}>
 
-			<Link className="reminderCard__info" to={`/reminder/${ props.id }`}>
+			<Link className="reminder-card__info" to={`/reminder/${ props.id }`}>
 				<img src="https://via.placeholder.com/100x100?text=image" alt="reminder poster"/>
-				<h2>{props.name}</h2>
-				<span>{t("reminder:card.type")} {t(`reminder:type.${props.type}`)}</span>
-				<span>{t("reminder:card.release-date")} {handleFormatDate(props.date)}</span>
-				<span>{t("reminder:card.comment")} {props.comment}</span>
+				<div className="reminder-card__info__title">
+					<h2>{props.name}</h2>
+					<Icon name="heart" className={`fav-icon ${fav ? "fav-selected" : ""}`} onClick={handleFav}/>
+				</div>
+				<div className="reminder-card__info__data">{t("reminder:card.type")} {t(`reminder:type.${props.type}`)}</div>
+				<div className="reminder-card__info__data">{t("reminder:card.release-date")} {handleFormatDate(props.date)}</div>
+				<div className="reminder-card__info__data">{t("reminder:card.comment")} {props.comment}</div>
 			</Link>
 			
-			<div className="reminderCard__action" >
+			<div className="reminder-card__action" >
 				<Link to={`/reminder/update/${ props.id }`}>
-					<Icon name="new-message" className="reminderCard__action--icon" />
+					<Icon name="new-message" className="reminder-card__action--icon" />
 				</Link>
 				
-				<Icon onClick={() => handleDelete(props.id)} name="trash" className="reminderCard__action--icon" />
+				<Icon onClick={() => handleDelete(props.id)} name="trash" className="reminder-card__action--icon" />
 			</div>
 		</div>
 	);
