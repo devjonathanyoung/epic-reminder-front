@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import deleteReminder from "../../services/delete-reminder";
+import addFavReminder from "../../services/add-fav-reminder";
 import { useTranslation } from "react-i18next";
-import "../reminder-card/reminder-card.scss";
+import { AuthContext } from "../../../user/auth/auth-context.js";
 import Icon from "../../../core/component/icon/icon";
+import "../reminder-card/reminder-card.scss";
 
 const ReminderCard = (props) => {
 	const { t } = useTranslation();
+	const { user } = useContext(AuthContext);
 	const [fav, setFav ] = useState(false);
 
 	const handleDelete = (id) => {
@@ -19,7 +22,17 @@ const ReminderCard = (props) => {
 
 	const handleFav = (e) => {
 		e.preventDefault();
-		setFav(prevState => !prevState);
+		const favToAdd = { user_id: user.id, reminder_id: props.id };
+		addFavReminder(favToAdd)
+			.then((response) => {
+				if(!response.error) {
+					setFav(prevState => !prevState);
+				}
+				//TODO: ici ajouter le deleteReminderFav si il existe déjà
+			})
+			.catch((error) => {
+				console.error(error);
+			});
 	};
 
 	return(
