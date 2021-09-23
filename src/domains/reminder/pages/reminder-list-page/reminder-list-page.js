@@ -66,7 +66,7 @@ const ReminderListPage = () => {
 			<ReminderContent>
 				{!isLoading && !isError && remindersList.length ? ( remindersList.map((reminder) => {
 					return (
-						<ReminderCard key={reminder.id} {...reminder}/>
+						<ReminderCard key={reminder.id} reminder={reminder}/>
 					);
 				})) : <h3>{handleReminderNotFound()}</h3>	
 				}
