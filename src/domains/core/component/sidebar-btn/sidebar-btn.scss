@@ -2,7 +2,7 @@
     position: relative;
 
     &:not(:last-child) {
-        margin-bottom: 2rem;
+        margin-bottom: 20px;
     }
 };
 
@@ -31,7 +31,20 @@
     text-decoration: none;
     text-transform: uppercase;
     display: block;
-    padding: 1.5rem 2rem;
+    padding: 15px 20px;
     position:relative;
     z-index: 100;
+}
+
+.sidebar__btn--basic {
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    padding: 15px 20px;
+    transition: all .4s ease;
+    cursor: pointer;
+    
+    &:hover {
+        background-color: var(--color-grey-dark-2);
+    }
 }

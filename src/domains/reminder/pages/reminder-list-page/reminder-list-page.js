@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useContext, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ReminderCard } from "../../index";
@@ -11,11 +11,16 @@ import ActiveBtn from "../../../core/component/sidebar-btn/sidebar-active-btn";
 import AnimatedBtn from "../../../core/component/sidebar-btn/sidebar-animated-btn";
 import FilterType from "../../../core/component/filter-type/filter-type";
 import useReminderList from "../../custom-hooks/use-reminder-list";
+import FavoriteBtn from "../../component/favorite-btn/favorite-btn";
+import getAllReminderFavByUser from "../../services/get-all-fav-by-user";
+import { AuthContext } from "../../../user/auth/auth-context.js";
+
 
 const ReminderListPage = () => {
 	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
-	const { remindersList, isLoading, isError } = useReminderList(filter);
+	const { remindersList, setRemindersList, isLoading, isError } = useReminderList(filter);
 	const { t } = useTranslation();
+	const { user } = useContext(AuthContext);
 
 	const setSearch = (newSearch) => {
 		setFilter( (oldState) => ({ 
@@ -50,6 +55,24 @@ const ReminderListPage = () => {
 			return `No reminder of type ${filter.type} yet.`;
 		};
 	};
+
+	const displayFav = () => {
+		getAllReminderFavByUser(user?.id)
+			.then((allFavList) => {
+				const allFavListModified = allFavList.map(fav => ({
+					fav_id: fav.id,
+					id: fav.reminder_id,
+					date: fav.date,
+					name: fav.name, 
+					type: fav.type, 
+					comment: fav.comment
+				}));
+				setRemindersList(allFavListModified);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	};
 	
 	return(
 		<ReminderWrapper>
@@ -61,6 +84,7 @@ const ReminderListPage = () => {
 				<ActiveBtn to="/reminder/create" value={t("reminder:create.title")} />
 				<AnimatedBtn handleSortName={() => handleSort("name")} handleSortDate={() => handleSort("date")} />
 				<FilterType handleType={handleType} />
+				<FavoriteBtn showFav={displayFav}/>
 			</Sidebar>
 			
 			<ReminderContent>

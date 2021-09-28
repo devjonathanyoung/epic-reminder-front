@@ -21,7 +21,7 @@ const useReminderList = (filter) => {
 	useEffect(initList, [filter]);
 
 	return {
-		remindersList, isLoading, isError
+		remindersList, setRemindersList, isLoading, isError
 	};
 };
 export default useReminderList;

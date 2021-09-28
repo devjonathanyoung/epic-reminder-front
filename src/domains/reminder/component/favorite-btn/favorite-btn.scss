@@ -1,0 +1,11 @@
+.fav-btn {
+    background-color: var(--color-main-primary);
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+
+    .fav-icon {
+        margin-left: 10px;
+        fill: white;
+    }
+}

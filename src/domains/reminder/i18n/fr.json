@@ -6,7 +6,7 @@
         "book": "Livre",
         "game": "Jeu",
         "movie": "Film",
-        "all": "Toutes catégories"
+        "all": "Tous mes reminders"
     },
     "card": {
         "name": "Titre: ",
@@ -51,5 +51,8 @@
     },
     "search": {
         "search": "rechercher"
+    },
+    "favorites": {
+        "title": "Mes favoris"
     }
 }
