@@ -1,4 +1,4 @@
-import React, {  useContext, useState } from "react";
+import React, {  useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { ReminderCard } from "../../index";
@@ -17,8 +17,12 @@ import { AuthContext } from "../../../user/auth/auth-context.js";
 
 
 const ReminderListPage = () => {
-	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "" });
+	const [filter, setFilter] = useState({ isAsc: "desc", sortOn: "date", type: "all", search: "", userId: "dce4aba2-0658-4cda-9412-253e5d2c0c59" });
 	const { remindersList, setRemindersList, isLoading, isError } = useReminderList(filter);
+	const [ favList, setFavList ] = useState([]);
+	//TODO: 1) une fois qu'on aura remindersList avec isFavorite value: on pourra juste passer en props isFavorite et plus FavList
+	//TODO: 2) passer le bon userId à la requete
+
 	const { t } = useTranslation();
 	const { user } = useContext(AuthContext);
 
@@ -57,6 +61,12 @@ const ReminderListPage = () => {
 	};
 
 	const displayFav = () => {
+		setRemindersList(favList);
+	};
+
+	//TODO: ne pas faire de requete avec les fav. Mais dans la requete du useReminderList,
+	// remindersList doit comporter un champ "isFavorite"
+	/* useEffect(() => {
 		getAllReminderFavByUser(user?.id)
 			.then((allFavList) => {
 				const allFavListModified = allFavList.map(fav => ({
@@ -67,12 +77,17 @@ const ReminderListPage = () => {
 					type: fav.type, 
 					comment: fav.comment
 				}));
-				setRemindersList(allFavListModified);
+				setFavList(allFavListModified);
 			})
 			.catch((error) => {
 				console.error(error);
 			});
-	};
+	}, [user, setFavList]); */
+
+	useEffect(() => {
+		//TODO: remove le userId test que j'ai mis ici pour test mais utiliser celui du Context
+		setRemindersList((oldFilter) => ({ ...oldFilter, userId: "dce4aba2-0658-4cda-9412-253e5d2c0c59" }));
+	}, []);
 	
 	return(
 		<ReminderWrapper>
@@ -90,7 +105,7 @@ const ReminderListPage = () => {
 			<ReminderContent>
 				{!isLoading && !isError && remindersList.length ? ( remindersList.map((reminder) => {
 					return (
-						<ReminderCard key={reminder.id} reminder={reminder}/>
+						<ReminderCard key={reminder.id} reminder={reminder} favList={favList}/>
 					);
 				})) : <h3>{handleReminderNotFound()}</h3>	
 				}

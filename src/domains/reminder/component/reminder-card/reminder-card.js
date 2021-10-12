@@ -9,7 +9,7 @@ import Icon from "../../../core/component/icon/icon";
 import "../reminder-card/reminder-card.scss";
 
 const ReminderCard = (props) => {
-	const { reminder } = props;
+	const { reminder, favList } = props;
 	const { t } = useTranslation();
 	const { user } = useContext(AuthContext);
 	const [fav, setFav ] = useState(false);
@@ -37,15 +37,12 @@ const ReminderCard = (props) => {
 	};
 
 	useEffect(()=> {
-		getAllReminderFavByUser(user?.id)
-			.then((allFavList) => {
-				const reminderIsInFav = allFavList.some(favorite => favorite.reminder_id === reminder?.id);
-				setFav(reminderIsInFav);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-	}, [user?.id, reminder?.id, setFav]);
+		// remove getAllReminderFavByUser ici et le mettre dans reminderListPage
+		// et faire passer en props le allFavList
+		const reminderIsInFav = favList.some(favorite => favorite.id === reminder?.id);
+		setFav(reminderIsInFav);
+
+	}, [favList]);
 
 	return(
 
